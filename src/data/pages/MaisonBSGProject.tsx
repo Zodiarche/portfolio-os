@@ -2,32 +2,36 @@ import ProjectPage, { type ProjectData } from "./ProjectPage";
 
 const maisonBSGData: ProjectData = {
   title: "La Maison BSG",
-  subtitle: "E-commerce artisanal fullstack : API, site web et application mobile",
+  subtitle:
+    "Boutique artisanale en ligne menée seule : une API, un site web et une application mobile dans un même monorepo",
   icon: "🏠",
   tech: [
-    { label: "Backend", items: ["Fastify", "Prisma", "PostgreSQL", "Stripe"] },
-    { label: "Web", items: ["Next.js", "Tailwind", "Zustand", "TipTap"] },
+    { label: "Backend", items: ["Fastify", "Prisma", "PostgreSQL", "Zod", "Stripe"] },
+    { label: "Web", items: ["Next.js", "React 19", "Tailwind", "Zustand", "TanStack Query", "TipTap"] },
     { label: "Mobile", items: ["Expo", "React Native", "TanStack Query"] },
-    { label: "Infra", items: ["Docker", "GitHub Actions", "Cloudinary", "Resend"] },
+    {
+      label: "Infra & qualité",
+      items: ["Docker", "Traefik", "VPS", "GitHub Actions", "Biome", "GlitchTip", "Cloudinary", "Resend"],
+    },
   ],
   description: [
-    "La Maison BSG est une boutique en ligne complète pour une marque artisanale. Les clients peuvent parcourir le catalogue, acheter en ligne, suivre leurs commandes, et laisser des avis. L'artisan gère tout depuis un dashboard admin dédié.",
-    "J'ai construit le projet de zéro avec trois applications : une API, un site web et une application mobile, le tout dans un seul monorepo. Le site couvre l'intégralité de la chaîne e-commerce, du catalogue au paiement en passant par la gestion des commandes.",
-    "Le projet est actuellement en staging, en attente de la finalisation des démarches de création d'entreprise de l'artisane.",
+    "Une artisane veut vendre ses créations en ligne et a besoin de toute la chaîne côté client : un catalogue public, un panier, un paiement sécurisé et un suivi des commandes. Côté gestion, il lui faut piloter sa boutique sans toucher au code, aussi bien depuis un poste fixe que depuis son téléphone, pour suivre les commandes et publier de nouveaux produits au quotidien.",
+    "La plateforme couvre l'intégralité de la chaîne e-commerce à travers trois applications réunies dans un seul monorepo : une API REST Fastify/Prisma (catalogue, commandes, paiement Stripe, emails transactionnels), un site Next.js (navigation, panier, favoris, paiement, compte client et dashboard admin) et une application mobile Expo qui sert de back-office nomade à l'artisane (gestion des commandes et du catalogue), protégée par déverrouillage biométrique. Les types de domaine (produits, commandes, adresses) sont partagés entre le site et l'application via un package interne.",
+    "Un projet mené seul, de la conception au déploiement. Il tourne aujourd'hui sur un VPS (Docker Compose derrière Traefik, déploiement scripté avec healthchecks), pas encore ouvert au public en attendant la finalisation de la création d'entreprise de l'artisane. La qualité est tenue à zéro défaut (Biome en CI bloquante, zéro warning) et les erreurs sont remontées par un monitoring auto-hébergé.",
   ],
   features: [
-    "Catalogue de produits avec catégories, tailles et gestion des stocks",
-    "Paiement en ligne sécurisé, codes promo et suivi des commandes",
-    "Dashboard admin : gestion des produits, modération des avis clients et journal d'activité",
-    "Application mobile avec connexion biométrique (empreinte / Face ID)",
-    "Espace utilisateur : inscription, favoris, adresses multiples et historique de commandes",
-    "Newsletter et référencement optimisé",
+    "Catalogue produits : catégories, tailles, gestion des stocks, descriptions riches (TipTap) et images (Cloudinary)",
+    "Tunnel d'achat complet : panier, favoris, codes promo, paiement Stripe et suivi des commandes",
+    "Dashboard admin : gestion du catalogue, modération des avis clients et journal d'activité",
+    "Back-office mobile pour l'artisane : gestion des commandes et du catalogue, déverrouillage biométrique (empreinte / Face ID)",
+    "Espace client : inscription, adresses multiples, historique de commandes et emails transactionnels (Resend)",
+    "Référencement optimisé et newsletter",
   ],
   highlights: [
-    "Projet construit de zéro : API, site web et application mobile dans un seul monorepo avec des types partagés entre les trois",
-    "Authentification sécurisée jusque dans les couches les plus profondes du site, en contournant les limitations techniques de Next.js",
-    "Architecture API modulaire : chaque domaine (auth, produits, commandes, paiement) est isolé et testable indépendamment",
-    "Pipeline CI/CD complète : chaque modification est automatiquement vérifiée, compilée et testée avant d'être intégrée",
+    "Monorepo trois apps à contrat typé : les types de domaine sont partagés entre le site et l'application mobile via un package interne, pour qu'une évolution du modèle se répercute à la compilation au lieu de diverger en silence entre les clients.",
+    "Protection des routes au plus tôt, dans le middleware Edge de Next.js : la vérification du JWT (signature HMAC-SHA256 via Web Crypto, expiration avec tolérance d'horloge, contrôle du rôle admin) se fait avant tout rendu de page, le runtime Edge n'ayant pas accès à la librairie JWT de Node. Les cookies invalides sont purgés pour éviter les boucles de redirection.",
+    "API modulaire par domaine : auth, produits, commandes et paiement sont des plugins Fastify isolés, validés par Zod et testables séparément (tests unitaires sans base, tests d'intégration sur PostgreSQL réel).",
+    "Mise en production maîtrisée : déploiement scripté sur VPS (Docker Compose derrière Traefik, healthchecks), monitoring d'erreurs auto-hébergé (GlitchTip), et qualité verrouillée (Biome en CI bloquante).",
   ],
   links: [],
 };

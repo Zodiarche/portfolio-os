@@ -35,6 +35,7 @@ export const categories: SkillCategory[] = [
           "Authentification biométrique (empreinte, Face ID)",
           "Stockage sécurisé des tokens",
           "Data fetching avec TanStack Query",
+          "Mises à jour OTA (expo-updates)",
         ],
       },
       {
@@ -123,6 +124,7 @@ export const categories: SkillCategory[] = [
           "Architecture modulaire par plugins",
           "Validation des requêtes avec Zod",
           "Intégration Stripe : checkout et webhooks",
+          "Emails transactionnels (Resend) et upload de médias (Cloudinary)",
           "Sécurité : Helmet, Rate Limiting, CORS",
         ],
       },
@@ -203,6 +205,7 @@ export const categories: SkillCategory[] = [
           "Healthchecks, volumes, réseaux internes",
           "Sécurité : utilisateur non-root, .dockerignore",
           "Traefik comme reverse proxy avec SSL/TLS",
+          "Monitoring d'erreurs auto-hébergé (GlitchTip, protocole Sentry) derrière Traefik",
         ],
       },
       {
@@ -250,6 +253,8 @@ export const categories: SkillCategory[] = [
           "Vitest et Jest pour les tests unitaires et d'intégration",
           "Testing Library (React, DOM) pour les tests de composants",
           "Supertest pour les tests d'API HTTP",
+          "Tests end-to-end avec Playwright",
+          "Tests d'intégration API sur base PostgreSQL réelle",
           "Coverage avec V8",
         ],
       },
