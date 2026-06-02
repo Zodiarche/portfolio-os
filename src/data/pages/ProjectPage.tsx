@@ -105,30 +105,34 @@ export default function ProjectPage({
 
 const portfolioData: ProjectData = {
   title: "Portfolio OS",
-  subtitle: "Un portfolio web interactif inspiré de Windows",
+  subtitle:
+    "Mon portfolio conçu comme un système d'exploitation : l'interface que vous manipulez en ce moment est elle-même la démonstration technique (fenêtres, bureau, explorateur de fichiers), sans aucune librairie de navigation",
   icon: "🖥️",
   tech: [
     { label: "Framework", items: ["React", "TypeScript"] },
     { label: "UI", items: ["Material UI", "Emotion"] },
     { label: "Animations", items: ["framer-motion", "react-rnd"] },
-    { label: "Build", items: ["Vite"] },
+    { label: "Build", items: ["Vite", "Bun"] },
+    { label: "Infra", items: ["Docker", "nginx", "Traefik"] },
   ],
   description: [
-    "Un portfolio conçu comme un système d'exploitation. L'interface que vous utilisez en ce moment est elle-même la démonstration technique. Chaque section du portfolio s'ouvre dans une fenêtre, comme sur un vrai bureau.",
-    "Pas de librairie de navigation : tout repose sur un système de fenêtres indépendantes que l'on peut déplacer, redimensionner, minimiser et maximiser, avec des animations fluides à chaque action.",
+    "Un portfolio, d'habitude, ça se parcourt. Celui-ci se manipule : l'interface elle-même tient lieu de démonstration technique. Ce que vous utilisez en ce moment est le projet.",
+    "Je l'ai construit comme un système d'exploitation : chaque section s'ouvre dans une fenêtre qu'on déplace, redimensionne, minimise ou maximise, le bureau porte des icônes repositionnables, un explorateur range les sections en arborescence et une barre des tâches suit les fenêtres ouvertes. Le tout sans aucune librairie de navigation : tout repose sur un système de fenêtres maison. Sur mobile, l'interface bascule automatiquement vers une métaphore d'écran d'accueil de téléphone.",
+    "C'est un projet solo de bout en bout : conçu et développé en TypeScript strict sur React 18 et Vite, puis mis en ligne sur mon propre serveur (image Docker multi-stage servie par nginx derrière Traefik sur mon VPS). Il héberge aussi mon CV.",
   ],
   features: [
-    "Fenêtres déplaçables et redimensionnables avec minimisation, maximisation et gestion du focus",
-    "Icônes du bureau repositionnables avec placement automatique sans chevauchement",
+    "Fenêtres déplaçables et redimensionnables, avec minimisation, maximisation et gestion du focus",
+    "Bureau à icônes repositionnables : alignement sur la grille et évitement automatique des collisions",
     "Explorateur de dossiers pour organiser les sections du portfolio en arborescence",
-    "Barre des tâches avec horloge et accès rapide aux fenêtres ouvertes",
-    "Formulaire de contact avec protection anti-spam",
+    "Barre des tâches avec horloge et bascule rapide entre les fenêtres ouvertes",
+    "Version mobile dédiée : bascule automatique vers une métaphore d'écran d'accueil de téléphone (barre d'état, accueil, vue application)",
+    "Formulaire de contact avec protection anti-spam (honeypot et anti-renvoi)",
   ],
   highlights: [
-    "Système de fenêtres entièrement custom : chaque fenêtre gère sa propre position et taille, avec des animations distinctes à l'ouverture, la minimisation et la restauration",
-    "Placement intelligent des icônes : un algorithme maison calcule la meilleure position libre sur le bureau, sans jamais superposer deux icônes",
-    "Animation de minimisation vers la barre des tâches : la fenêtre se réduit précisément vers son icône dans la taskbar, calculé en temps réel",
-    "Thème visuel centralisé : couleurs, arrondis et ombres définis une seule fois et appliqués uniformément à toute l'interface",
+    "Aucune librairie de navigation : le système de fenêtres est écrit à la main (chaque fenêtre gère sa position, sa taille, son focus et son z-index), avec des animations distinctes selon l'état : ressort à l'ouverture, glissement à la minimisation et à la restauration. Cohérent avec le parti pris du projet : faire de l'interface elle-même la démonstration.",
+    "Animation de minimisation calculée en temps réel : la fenêtre se réduit vers le centre exact de son icône dans la barre des tâches, l'offset étant recalculé à partir de la position réelle de l'icône à chaque minimisation plutôt qu'avec une valeur en dur. Elle reste donc juste même après un redimensionnement de la fenêtre ou de l'écran.",
+    "Placement automatique des icônes : à la dépose, l'icône s'aligne sur la grille et, si la case est occupée, une recherche en spirale (distance de Manhattan) trouve la case libre la plus proche. Deux icônes ne se superposent jamais, sans pour autant imposer un rangement rigide.",
+    "Pages chargées à la demande : chaque page vit dans son propre chunk et n'est téléchargée qu'à l'ouverture de sa fenêtre, ce qui garde le bundle initial léger : un visiteur qui n'ouvre pas une section n'en paie pas le poids.",
   ],
   links: [{ label: "GitHub", href: "https://github.com/Zodiarche/portfolio-os" }],
 };

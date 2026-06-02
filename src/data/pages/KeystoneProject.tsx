@@ -26,8 +26,8 @@ const keystoneData: ProjectData = {
   ],
   highlights: [
     "Légèreté radicale grâce à Tauri (Rust) au lieu d'Electron : autour de 5 Mo en fonctionnement, contre environ 200 Mo pour le runtime Overwolf seul (sur lequel s'appuient Outplayed et Porofessor) et jusqu'à 500 Mo pour DPM. L'app reste invisible quand on est en train de jouer.",
-    "Une seule app continue : tout est cliquable et relié — d'une partie au profil d'un coéquipier, d'un coéquipier récurrent aux parties communes, d'un clip Studio au match qui l'a généré. Les filtres (saison, rôle, champion) sont mémorisés dans l'URL et navigation entièrement au clavier. C'est ce croisement permanent des données qui est impossible à reproduire entre trois apps séparées.",
-    "Sécurité côté serveur : la clé API Riot vit uniquement sur le serveur, chiffrée en base, jamais sur les machines des utilisateurs. Elle est rechargée à chaud sans interruption de service. Chaque partie n'est récupérée qu'une fois auprès de Riot puis partagée avec tous les utilisateurs — c'est ce qui permet de tenir une bêta complète sous une seule clé de développement.",
+    "Une seule app continue : tout est cliquable et relié : d'une partie au profil d'un coéquipier, d'un coéquipier récurrent aux parties communes, d'un clip Studio au match qui l'a généré. Les filtres (saison, rôle, champion) sont mémorisés dans l'URL et navigation entièrement au clavier. C'est ce croisement permanent des données qui est impossible à reproduire entre trois apps séparées.",
+    "Sécurité côté serveur : la clé API Riot vit uniquement sur le serveur, chiffrée en base, jamais sur les machines des utilisateurs. Elle est rechargée à chaud sans interruption de service. Chaque partie n'est récupérée qu'une fois auprès de Riot puis partagée avec tous les utilisateurs, ce qui permet de tenir une bêta complète sous une seule clé de développement.",
     "Studio entièrement local : capture vidéo qui choisit toute seule le meilleur encodeur GPU disponible (avec repli CPU si rien d'autre n'est exploitable) et synchronise automatiquement les clips sur les temps forts remontés en direct par le jeu lui-même.",
   ],
   links: [
