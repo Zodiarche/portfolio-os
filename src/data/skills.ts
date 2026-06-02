@@ -38,6 +38,15 @@ export const categories: SkillCategory[] = [
         ],
       },
       {
+        name: "Tauri 2",
+        capabilities: [
+          "Application desktop multi-fenêtres (fenêtre principale + overlay)",
+          "IPC commandes Rust ↔ React (invoke)",
+          "Mise à jour automatique signée (plugin updater, clés Ed25519)",
+          "Empreinte mémoire minimale (~5 Mo) face à un runtime Electron",
+        ],
+      },
+      {
         name: "TypeScript",
         capabilities: [
           "Typage strict : interfaces, types union, génériques",
@@ -88,6 +97,15 @@ export const categories: SkillCategory[] = [
           "ES Modules et architecture modulaire",
           "WebSocket pour la communication temps réel",
           "Streams et gestion événementielle",
+        ],
+      },
+      {
+        name: "Rust",
+        capabilities: [
+          "Backend en architecture hexagonale (domain / application / infrastructure / presentation)",
+          "API HTTP avec axum",
+          "Accès PostgreSQL et chiffrement de secrets en base, rechargés à chaud sans interruption",
+          "Capture vidéo locale : sélection automatique de l'encodeur GPU avec repli CPU",
         ],
       },
       {
