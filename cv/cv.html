@@ -481,7 +481,6 @@
                 Dockerisation de l'environnement local PHP et déploiement
                 automatisé via SSH sur o2switch
               </li>
-              <li>Mise en place et priorisation du backlog</li>
             </ul>
             <div class="tags">
               <span class="tag">React</span>
@@ -544,28 +543,16 @@
               joueurs LoL empilent aujourd'hui entre Overwolf, Outplayed,
               Porofessor et DPM (~5 Mo de RAM contre des centaines)
             </p>
-            <a
-              class="cta"
-              href="https://keystone.guillemin.dev/"
-              target="_blank"
-              rel="noopener"
-              >Obtenir l'application <span class="cta__arrow">↗</span></a
-            >
             <ul class="entry__list">
               <li>
                 Tout-en-un ~5 Mo et moins de 2% CPU en remplacement de 3 apps
-                (Outplayed, Porofessor, DPM : ~500 Mo, ~20% CPU), assez léger
-                pour une config modeste
+                gourmandes (DPM ~500 Mo, ~20% CPU) : léger même sur une config
+                modeste
               </li>
               <li>
-                Client léger en Rust (Tauri 2) : la clé API Riot ne quitte
-                jamais le serveur, mise à jour sans interruption ; chaque partie
-                n'est récupérée qu'une fois côté Riot puis partagée avec tous
-                les utilisateurs
-              </li>
-              <li>
-                Mené seul de bout en bout : 1.0 en bêta fermée (~15 testeurs),
-                mise à jour signée, déploiement Docker/Traefik
+                Client Rust (Tauri 2), mené seul : clé API Riot côté serveur,
+                1.0 en bêta fermée (~15 testeurs), MAJ signée, déploiement
+                Docker/Traefik
               </li>
             </ul>
             <div class="tags">
@@ -590,15 +577,12 @@
             <ul class="entry__list">
               <li>
                 Monorepo construit de zéro : API Fastify/Prisma, site Next.js,
-                app mobile Expo, types de domaine partagés
+                back-office mobile Expo, types de domaine partagés
               </li>
               <li>
-                Paiement Stripe, auth JWT + déverrouillage biométrique,
-                dashboard admin avec journal d'activité
-              </li>
-              <li>
-                Déployé sur VPS (Docker, Traefik), monitoring d'erreurs
-                auto-hébergé, CI Biome zéro warning
+                Paiement Stripe, auth JWT + biométrie, dashboard admin ;
+                déployé sur VPS (Docker/Traefik), monitoring auto-hébergé, CI
+                Biome bloquante
               </li>
             </ul>
             <div class="tags">
@@ -607,6 +591,38 @@
               <span class="tag">Prisma</span>
               <span class="tag">Expo</span>
               <span class="tag">Stripe</span>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="entry__head">
+              <span class="entry__title"
+                >Portfolio OS – Créateur &amp; développeur</span
+              >
+              <span class="entry__date">2026</span>
+            </div>
+            <p class="entry__subtitle">
+              Portfolio conçu comme un système d'exploitation : l'interface
+              elle-même sert de démonstration technique, sans librairie de
+              navigation
+            </p>
+            <ul class="entry__list">
+              <li>
+                Système de fenêtres écrit à la main (déplacement,
+                redimensionnement, minimisation, focus) et version mobile
+                dédiée
+              </li>
+              <li>
+                Pages chargées à la demande (code-split par fenêtre), déployé
+                en Docker/nginx derrière Traefik
+              </li>
+            </ul>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">MUI</span>
+              <span class="tag">Vite</span>
+              <span class="tag">framer-motion</span>
             </div>
           </article>
 
