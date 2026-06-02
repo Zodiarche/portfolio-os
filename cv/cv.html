@@ -546,9 +546,9 @@
                 modeste
               </li>
               <li>
-                Client Rust (Tauri 2), mené seul : clé API Riot côté serveur,
-                1.0 en bêta fermée (~15 testeurs), MAJ signée, déploiement
-                Docker/Traefik
+                Conçu et livré seul jusqu'à une bêta fermée (~15 testeurs) ; clé
+                API Riot mutualisée côté serveur, ce qui permet de tenir toute la
+                bêta sous une seule clé de développement
               </li>
             </ul>
             <div class="tags">
@@ -572,13 +572,13 @@
             </p>
             <ul class="entry__list">
               <li>
-                Monorepo construit de zéro : API Fastify/Prisma, site Next.js,
-                back-office mobile Expo, types de domaine partagés
+                Plateforme full-stack (web, mobile, API) menée seule, avec un
+                contrat de types partagé de bout en bout qui empêche toute
+                divergence entre les apps
               </li>
               <li>
-                Paiement Stripe, auth JWT + biométrie, dashboard admin ; déployé
-                sur VPS (Docker/Traefik), monitoring auto-hébergé, CI Biome
-                bloquante
+                Traitée comme un produit en production, pas un prototype :
+                déploiement scripté sur VPS, monitoring d'erreurs et CI bloquante
               </li>
             </ul>
             <div class="tags">
@@ -603,14 +603,13 @@
             </p>
             <ul class="entry__list">
               <li>
-                Jeu reconstruit seul en monorepo Bun/Turbo : client React,
-                serveur Express/Prisma, types de domaine partagés, auth
-                e-mail/mot de passe (JWT, bcrypt)
+                Combat Flash d'origine préservé : j'ai rétro-conçu le format de
+                payload du .swf pour lui injecter un déroulé calculé côté
+                serveur, sans toucher à l'animation d'époque
               </li>
               <li>
-                Combat d'origine conservé : client Flash (.swf) rejoué via
-                Ruffle, alimenté par un déroulé calculé côté serveur au format
-                de payload rétro-conçu
+                Jeu complet reconstruit seul, du serveur au client : recrutement,
+                combats PvE/PvP et classement, logique en TypeScript
               </li>
             </ul>
             <div class="tags">
