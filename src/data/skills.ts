@@ -98,6 +98,7 @@ export const categories: SkillCategory[] = [
           "ES Modules et architecture modulaire",
           "WebSocket pour la communication temps réel",
           "Streams et gestion événementielle",
+          "Reverse-engineering de formats de payload binaires et pilotage d'un runtime legacy (ex. Flash/Ruffle alimenté côté serveur)",
         ],
       },
       {
@@ -213,6 +214,7 @@ export const categories: SkillCategory[] = [
         capabilities: [
           "Runtime et package manager alternatif à Node.js/npm",
           "Gestion de monorepos avec les workspaces",
+          "Orchestration de monorepo avec Turbo (pipelines build/test/lint mis en cache)",
           "Exécution de scripts et de tests",
         ],
       },
