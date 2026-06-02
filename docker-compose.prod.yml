@@ -1,0 +1,19 @@
+services:
+  portfolio-zozo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portfolio-zozo.rule=Host(`guillemin.dev`)"
+      - "traefik.http.routers.portfolio-zozo.entrypoints=websecure"
+      - "traefik.http.routers.portfolio-zozo.tls.certresolver=letsencrypt"
+      - "traefik.http.services.portfolio-zozo.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

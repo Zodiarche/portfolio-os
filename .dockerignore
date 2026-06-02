@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.gitignore
+*.md
+cv
+.claude
+tasks
+biome.json
+docker-compose*.yml
+.dockerignore
+Dockerfile
+.env
+.env.*
+*.local

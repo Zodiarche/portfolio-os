@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=794, initial-scale=1" />
+    <title>CV — Benjamin Guillemin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* =========================================================================
+     Design tokens — edit these to restyle the whole CV at once.
+     Sizes are kept in px so the page maps 1:1 to the Figma A4 frame
+     (794 x 1123 px) and re-imports cleanly through html.to.design.
+     ========================================================================= */
+      :root {
+        /* Page geometry (A4 at 96dpi) */
+        --page-width: 794px;
+        --page-height: 1123px;
+        --sidebar-width: 260px;
+
+        /* Colors — sidebar (dark) */
+        --sidebar-bg: #1e293b;
+        --sidebar-divider: #334155;
+        --color-on-dark-strong: #ffffff;
+        --color-on-dark: #e2e8f0;
+        --color-on-dark-muted: #94a3b8;
+        --color-on-dark-faint: #64748b;
+
+        /* Colors — main column (light) */
+        --main-bg: #ffffff;
+        --color-heading: #1a1a1a;
+        --color-subtitle: #666666;
+        --color-body: #444444;
+        --color-date: #888888;
+        --rule-strong: #1e293b;
+        --tag-bg: #f1f5f9;
+        --tag-text: #1e293b;
+
+        /* Type scale */
+        --font:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        background: #525659; /* neutral backdrop when viewed in a browser */
+      }
+
+      body {
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        display: flex;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      /* The page itself — one fixed A4 sheet. */
+      .page {
+        width: var(--page-width);
+        height: var(--page-height);
+        background: var(--main-bg);
+        display: flex;
+        overflow: hidden;
+      }
+
+      /* ---------------------------------------------------------------- Sidebar */
+      .sidebar {
+        width: var(--sidebar-width);
+        flex-shrink: 0;
+        background: var(--sidebar-bg);
+        padding: 36px 24px;
+        color: var(--color-on-dark);
+      }
+
+      .name {
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 26.4px;
+        letter-spacing: 0.66px;
+        text-transform: uppercase;
+        color: var(--color-on-dark-strong);
+      }
+
+      .role {
+        margin-top: 6px;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        color: var(--color-on-dark-muted);
+      }
+
+      .sidebar-section {
+        margin-top: 30px;
+      }
+
+      .sidebar-section__title {
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--color-on-dark-strong);
+        padding-bottom: 6px;
+        border-bottom: 0.667px solid var(--sidebar-divider);
+      }
+
+      .field {
+        margin-top: 12px;
+      }
+
+      .field__label {
+        font-size: 9.5px;
+        font-weight: 600;
+        line-height: 15.2px;
+        letter-spacing: 0.475px;
+        text-transform: uppercase;
+        color: var(--color-on-dark-faint);
+      }
+
+      .field__value {
+        font-size: 10.5px;
+        font-weight: 400;
+        line-height: 16.8px;
+        color: var(--color-on-dark);
+      }
+
+      .field__value a {
+        color: var(--color-on-dark);
+        text-decoration: underline;
+      }
+
+      .skill {
+        margin-top: 12px;
+      }
+
+      .skill__category {
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 16px;
+        color: var(--color-on-dark-strong);
+      }
+
+      .skill__list {
+        margin-top: 2px;
+        font-size: 9.5px;
+        font-weight: 400;
+        line-height: 15.2px;
+        color: var(--color-on-dark-muted);
+      }
+
+      .timeline {
+        margin-top: 12px;
+      }
+
+      .timeline__period {
+        font-size: 9.5px;
+        font-weight: 400;
+        line-height: 15.2px;
+        color: var(--color-on-dark-faint);
+      }
+
+      .timeline__title {
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 17.6px;
+        color: var(--color-on-dark-strong);
+      }
+
+      .timeline__detail {
+        font-size: 9.5px;
+        font-weight: 400;
+        line-height: 15.2px;
+        color: var(--color-on-dark-muted);
+      }
+
+      /* ------------------------------------------------------------- Main column */
+      .main {
+        flex: 1;
+        padding: 36px 32px;
+        color: var(--color-body);
+      }
+
+      .main-section + .main-section {
+        margin-top: 32px;
+      }
+
+      .main-section__title {
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 17.6px;
+        letter-spacing: 1.32px;
+        text-transform: uppercase;
+        color: var(--color-heading);
+        padding-bottom: 5px;
+        border-bottom: 2px solid var(--rule-strong);
+      }
+
+      .entry {
+        margin-top: 20px;
+      }
+
+      .entry__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+      }
+
+      .entry__title {
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 20.8px;
+        color: var(--color-heading);
+      }
+
+      .entry__date {
+        flex-shrink: 0;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 16px;
+        color: var(--color-date);
+      }
+
+      .entry__subtitle {
+        margin-top: 2px;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 17.6px;
+        color: var(--color-subtitle);
+      }
+
+      .entry__list {
+        margin-top: 6px;
+        padding-left: 14px;
+        list-style: none;
+      }
+
+      .entry__list li {
+        position: relative;
+        font-size: 10.5px;
+        font-weight: 400;
+        line-height: 15.75px;
+        color: var(--color-body);
+      }
+
+      .entry__list li + li {
+        margin-top: 3px;
+      }
+
+      .entry__list li::before {
+        content: "•";
+        position: absolute;
+        left: -14px;
+        color: var(--color-date);
+      }
+
+      .tags {
+        margin-top: 6px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .tag {
+        background: var(--tag-bg);
+        color: var(--tag-text);
+        font-size: 9px;
+        font-weight: 500;
+        line-height: 14.4px;
+        padding: 2px 8px;
+        border-radius: 3px;
+      }
+
+      /* Call-to-action button — clickable in the exported PDF. */
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 6px;
+        background: var(--rule-strong);
+        color: #ffffff;
+        font-size: 9.5px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        line-height: 14px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+      }
+
+      .cta__arrow {
+        font-size: 10px;
+        line-height: 1;
+      }
+
+      /* ------------------------------------------------------------------ Print */
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html,
+        body {
+          background: #ffffff;
+        }
+        body {
+          padding: 0;
+        }
+        .page {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <!-- ===================================================== Sidebar (dark) -->
+      <aside class="sidebar">
+        <h1 class="name">Benjamin Guillemin</h1>
+        <p class="role">Développeur Fullstack Web &amp; Mobile</p>
+
+        <section class="sidebar-section">
+          <h2 class="sidebar-section__title">Informations</h2>
+
+          <div class="field">
+            <div class="field__label">Email</div>
+            <div class="field__value">benbar2412@gmail.com</div>
+          </div>
+          <div class="field">
+            <div class="field__label">Téléphone</div>
+            <div class="field__value">+33 6 52 89 34 22</div>
+          </div>
+          <div class="field">
+            <div class="field__label">Portfolio</div>
+            <div class="field__value">
+              <a
+                href="https://guillemin.dev"
+                target="_blank"
+                rel="noopener"
+                >guillemin.dev</a
+              >
+            </div>
+          </div>
+          <div class="field">
+            <div class="field__label">LinkedIn</div>
+            <div class="field__value">
+              <a
+                href="https://www.linkedin.com/in/benjamin-guillemin"
+                target="_blank"
+                rel="noopener"
+                >visiter le profil</a
+              >
+            </div>
+          </div>
+          <div class="field">
+            <div class="field__label">GitHub</div>
+            <div class="field__value">
+              <a
+                href="https://github.com/Zodiarche"
+                target="_blank"
+                rel="noopener"
+                >github.com/Zodiarche</a
+              >
+            </div>
+          </div>
+          <div class="field">
+            <div class="field__label">GitLab</div>
+            <div class="field__value">
+              <a
+                href="https://gitlab.com/Zodiarche"
+                target="_blank"
+                rel="noopener"
+                >gitlab.com/Zodiarche</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-section">
+          <h2 class="sidebar-section__title">Compétences</h2>
+
+          <div class="skill">
+            <div class="skill__category">Langages</div>
+            <div class="skill__list">
+              TypeScript · JavaScript · Ruby · HTML · SCSS · SQL
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill__category">Frontend</div>
+            <div class="skill__list">
+              React · Next.js · React Native / Expo · TanStack (Query, Router,
+              Start) · Tailwind CSS · Zustand · Framer Motion
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill__category">Backend</div>
+            <div class="skill__list">
+              Node.js · NestJS · Fastify · Express · Prisma · PostgreSQL · MySQL
+              · MongoDB
+            </div>
+          </div>
+          <div class="skill">
+            <div class="skill__category">Outils &amp; DevOps</div>
+            <div class="skill__list">
+              Git · GitHub Actions · GitLab CI · Docker · Bun · Vite · Biome ·
+              Postman · Figma · Excalidraw · Miro
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-section">
+          <h2 class="sidebar-section__title">Formations</h2>
+
+          <div class="timeline">
+            <div class="timeline__period">2024 – 2026</div>
+            <div class="timeline__title">3W Academy</div>
+            <div class="timeline__detail">Bachelor Développeur Full Stack</div>
+            <div class="timeline__detail">
+              Concepteur Développeur d'applications
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="timeline__period">2019 – 2022</div>
+            <div class="timeline__title">Université de Bordeaux</div>
+            <div class="timeline__detail">Licence Informatique</div>
+          </div>
+        </section>
+
+        <section class="sidebar-section">
+          <h2 class="sidebar-section__title">Communauté</h2>
+
+          <div class="timeline">
+            <div class="timeline__period">Septembre 2020 – Présent</div>
+            <div class="timeline__title">Pokémon Workshop</div>
+            <div class="timeline__detail">
+              Modérateur et référent technique d'une communauté de créateurs de
+              jeux vidéo de plus de 9 000 membres.
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- ================================================== Main column (white) -->
+      <div class="main">
+        <section class="main-section">
+          <h2 class="main-section__title">Principales expériences</h2>
+
+          <article class="entry">
+            <div class="entry__head">
+              <span class="entry__title">Développeur Full Stack</span>
+              <span class="entry__date">Janvier 2024 – Février 2026</span>
+            </div>
+            <p class="entry__subtitle">Agence Buzz – Bordeaux – CDI</p>
+            <ul class="entry__list">
+              <li>
+                Introduction du développement mobile (Expo / React Native) pour
+                Android et iOS — compétence absente de l'agence avant mon
+                arrivée
+              </li>
+              <li>
+                Mise en place de Node.js et React en remplacement du stack
+                historique PHP, modernisant les process de développement
+              </li>
+              <li>
+                Développement de sites web et d'applications avec intégration de
+                back-offices personnalisés
+              </li>
+              <li>
+                Dockerisation de l'environnement local PHP et déploiement
+                automatisé via SSH sur o2switch
+              </li>
+              <li>Mise en place et priorisation du backlog</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">React Native / Expo</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Docker</span>
+              <span class="tag">GitLab</span>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="entry__head">
+              <span class="entry__title"
+                >Core Contributor &amp; Community Lead</span
+              >
+              <span class="entry__date">Septembre 2020 – Présent</span>
+            </div>
+            <p class="entry__subtitle">
+              Pokémon Workshop – Écosystème open-source de création de jeux
+            </p>
+            <ul class="entry__list">
+              <li>
+                Premier contributeur hors staff sur le moteur de jeu Ruby
+                (PokémonSDK) — contributions transversales : combat, rendu
+                visuel, UI, effets
+              </li>
+              <li>
+                Contributeur sur l'éditeur desktop React/Electron (Pokémon
+                Studio) — fonctionnalités, UX, corrections
+              </li>
+              <li>
+                Des centaines de merge requests reviewées sur 5 ans, modération
+                de la communauté (+9000 membres) et accompagnement des nouveaux
+                contributeurs
+              </li>
+              <li>Maintainer de la documentation officielle (Docusaurus)</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Ruby</span>
+              <span class="tag">TypeScript / React</span>
+              <span class="tag">Electron</span>
+              <span class="tag">GitLab CI</span>
+              <span class="tag">Kanban</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="main-section">
+          <h2 class="main-section__title">Projets 2026</h2>
+
+          <article class="entry">
+            <div class="entry__head">
+              <span class="entry__title"
+                >Keystone – Créateur &amp; développeur</span
+              >
+              <span class="entry__date">2026</span>
+            </div>
+            <p class="entry__subtitle">
+              Le companion desktop qui réunit en une seule app légère ce que les
+              joueurs LoL empilent aujourd'hui entre Overwolf, Outplayed,
+              Porofessor et DPM — ~5 Mo de RAM contre des centaines
+            </p>
+            <a
+              class="cta"
+              href="https://keystone.guillemin.dev/"
+              target="_blank"
+              rel="noopener"
+              >Obtenir l'application <span class="cta__arrow">↗</span></a
+            >
+            <ul class="entry__list">
+              <li>
+                Réunit dans une seule app ~5 Mo ce qu'il faut aujourd'hui
+                empiler entre Outplayed et Porofessor (apps Overwolf, ~200 Mo en
+                fond) et DPM (standalone, jusqu'à ~500 Mo), avec des croisements
+                entre clips, parties et coéquipiers impossibles entre outils
+                séparés
+              </li>
+              <li>
+                Client léger en Rust (Tauri 2) : la clé API Riot ne quitte
+                jamais le serveur, mise à jour sans interruption ; chaque partie
+                n'est récupérée qu'une fois côté Riot puis partagée avec tous
+                les utilisateurs
+              </li>
+              <li>
+                Conçu, développé, déployé et maintenu seul en 2 semaines :
+                ~15 000 lignes de Rust (Tauri + axum) et ~14 000 de TypeScript,
+                1.0 en bêta fermée (~15 testeurs), mise à jour automatique
+                signée, déploiement Docker/Traefik
+              </li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Tauri</span>
+              <span class="tag">Rust</span>
+              <span class="tag">axum</span>
+              <span class="tag">React</span>
+              <span class="tag">PostgreSQL</span>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="entry__head">
+              <span class="entry__title"
+                >La Maison BSG – Créateur &amp; développeur</span
+              >
+              <span class="entry__date">2026</span>
+            </div>
+            <p class="entry__subtitle">
+              E-commerce artisanal – API, site web et application mobile
+            </p>
+            <ul class="entry__list">
+              <li>
+                Projet construit de zéro en monorepo : API Fastify, site
+                Next.js, app mobile Expo
+              </li>
+              <li>
+                Paiement Stripe, authentification biométrique, dashboard admin
+                avec audit
+              </li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">Fastify</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">Expo</span>
+              <span class="tag">Stripe</span>
+            </div>
+          </article>
+
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
