@@ -14,7 +14,6 @@ export const categories: SkillCategory[] = [
           "Routing avec TanStack Router / TanStack Start (SSR)",
           "Formulaires avec React Hook Form + Zod",
           "Animations avec Framer Motion",
-          "Composants headless avec Radix UI + CVA",
           "Internationalisation avec i18next",
         ],
       },
@@ -97,8 +96,6 @@ export const categories: SkillCategory[] = [
           "Serveurs HTTP et API REST",
           "ES Modules et architecture modulaire",
           "WebSocket pour la communication temps réel",
-          "Streams et gestion événementielle",
-          "Reverse-engineering de formats de payload binaires et pilotage d'un runtime legacy (ex. Flash/Ruffle alimenté côté serveur)",
         ],
       },
       {
@@ -108,15 +105,6 @@ export const categories: SkillCategory[] = [
           "API HTTP avec axum",
           "Accès PostgreSQL et chiffrement de secrets en base, rechargés à chaud sans interruption",
           "Capture vidéo locale : sélection automatique de l'encodeur GPU avec repli CPU",
-        ],
-      },
-      {
-        name: "NestJS",
-        capabilities: [
-          "Architecture hexagonale (Ports & Adapters)",
-          "Modules, controllers, services et injection de dépendances",
-          "Authentification avec Passport et JWT",
-          "TypeORM pour l'accès aux données et les migrations",
         ],
       },
       {
@@ -239,7 +227,7 @@ export const categories: SkillCategory[] = [
         name: "Swagger / OpenAPI",
         capabilities: [
           "Documentation d'API REST interactive",
-          "Génération automatique depuis le code (Fastify, Express, NestJS)",
+          "Génération automatique depuis le code (Fastify, Express)",
         ],
       },
       {
