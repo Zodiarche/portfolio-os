@@ -6,7 +6,10 @@ const minitroopersData: ProjectData = {
     "La renaissance d'un jeu de gestion d'armée Flash de Motion-Twin, reconstruit sur une stack TypeScript moderne tout en rejouant le combat d'époque (.swf) dans le navigateur via Ruffle",
   icon: "🪖",
   tech: [
-    { label: "Client", items: ["React 19", "Vite 6", "TypeScript", "TanStack Query", "Zustand", "Tailwind CSS"] },
+    {
+      label: "Client",
+      items: ["React 19", "Vite 6", "TypeScript", "TanStack Query", "Zustand", "Tailwind CSS"],
+    },
     { label: "Serveur", items: ["Node.js", "Express", "Prisma", "PostgreSQL", "Zod", "JWT"] },
     { label: "Monorepo & Tests", items: ["Bun", "Turbo", "Docker", "Vitest", "Playwright"] },
     { label: "Combat legacy", items: ["Ruffle", "Flash (.swf)"] },

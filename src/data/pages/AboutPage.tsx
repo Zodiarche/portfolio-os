@@ -47,11 +47,10 @@ export default function AboutPage() {
       </Typography>
       <Typography variant="body1" paragraph>
         Après trois ans d'études en informatique à l'Université de Bordeaux, j'ai intégré la 3W
-        Academy en
-        alternance chez Agence Buzz. L'agence fonctionnait encore en PHP, FTP et Filezilla. J'y ai
-        introduit le développement mobile avec Expo et React Native, mis en place Node.js et React,
-        et dockerisé l'environnement local. En deux ans et demi, j'ai contribué à moderniser leurs
-        process de développement.
+        Academy en alternance chez Agence Buzz. L'agence fonctionnait encore en PHP, FTP et
+        Filezilla. J'y ai introduit le développement mobile avec Expo et React Native, mis en place
+        Node.js et React, et dockerisé l'environnement local. En deux ans et demi, j'ai contribué à
+        moderniser leurs process de développement.
       </Typography>
       <Typography variant="body1" paragraph>
         En parallèle, c'est au sein de Pokémon Workshop que j'ai le plus grandi en tant que

@@ -7,11 +7,23 @@ const maisonBSGData: ProjectData = {
   icon: "🏠",
   tech: [
     { label: "Backend", items: ["Fastify", "Prisma", "PostgreSQL", "Zod", "Stripe"] },
-    { label: "Web", items: ["Next.js", "React 19", "Tailwind", "Zustand", "TanStack Query", "TipTap"] },
+    {
+      label: "Web",
+      items: ["Next.js", "React 19", "Tailwind", "Zustand", "TanStack Query", "TipTap"],
+    },
     { label: "Mobile", items: ["Expo", "React Native", "TanStack Query"] },
     {
       label: "Infra & qualité",
-      items: ["Docker", "Traefik", "VPS", "GitHub Actions", "Biome", "GlitchTip", "Cloudinary", "Resend"],
+      items: [
+        "Docker",
+        "Traefik",
+        "VPS",
+        "GitHub Actions",
+        "Biome",
+        "GlitchTip",
+        "Cloudinary",
+        "Resend",
+      ],
     },
   ],
   description: [
