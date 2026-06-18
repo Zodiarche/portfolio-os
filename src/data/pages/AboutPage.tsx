@@ -25,7 +25,7 @@ export default function AboutPage() {
             Benjamin Guillemin
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            Concepteur Développeur
+            Développeur Fullstack Web & Mobile
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Bordeaux, France &nbsp;·&nbsp; {age} ans
@@ -46,7 +46,8 @@ export default function AboutPage() {
         Mon parcours
       </Typography>
       <Typography variant="body1" paragraph>
-        Après une licence informatique à l'Université de Bordeaux, j'ai intégré la 3W Academy en
+        Après trois ans d'études en informatique à l'Université de Bordeaux, j'ai intégré la 3W
+        Academy en
         alternance chez Agence Buzz. L'agence fonctionnait encore en PHP, FTP et Filezilla. J'y ai
         introduit le développement mobile avec Expo et React Native, mis en place Node.js et React,
         et dockerisé l'environnement local. En deux ans et demi, j'ai contribué à moderniser leurs
