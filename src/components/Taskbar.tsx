@@ -163,6 +163,23 @@ export default function Taskbar({
 
       <Box
         sx={{
+          display: { xs: "none", md: "flex" },
+          alignItems: "center",
+          height: 32,
+          px: 1.5,
+          mr: 1,
+          borderRadius: 1,
+          background: "rgba(255, 255, 255, 0.12)",
+          border: "1px solid rgba(255, 255, 255, 0.18)",
+        }}
+      >
+        <Typography variant="caption" color="white" noWrap>
+          En poste, ouvert au freelance
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
           minWidth: 100,
           height: 48,
           display: "flex",

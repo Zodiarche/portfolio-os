@@ -18,11 +18,38 @@ export default function MobileHomeScreen({ onOpenFile }: MobileHomeScreenProps) 
         backgroundPosition: "center",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         overflow: "hidden",
       }}
     >
+      <Box
+        sx={{
+          width: "100%",
+          px: 3,
+          pt: 4,
+          pb: 1,
+          color: "white",
+          textShadow: "0 1px 3px rgba(0,0,0,0.5)",
+        }}
+      >
+        <Typography variant="h6" fontWeight={700}>
+          Benjamin Guillemin
+        </Typography>
+        <Typography variant="body2" sx={{ opacity: 0.85 }}>
+          Développeur Fullstack Web &amp; Mobile
+        </Typography>
+        <Typography variant="body2" sx={{ opacity: 0.85 }}>
+          Bordeaux, France
+        </Typography>
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          Je construis des applications web et mobiles, du serveur à l'interface.
+        </Typography>
+        <Typography variant="caption" sx={{ display: "block", mt: 1, opacity: 0.85 }}>
+          En poste, ouvert au freelance
+        </Typography>
+      </Box>
+
       <Box
         sx={{
           display: "grid",
