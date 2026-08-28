@@ -9,35 +9,6 @@ export default function FolderExplorer({ folder, onOpenFile }: FolderExplorerPro
     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          px: 1.5,
-          py: 0.75,
-          bgcolor: "#f0f0f0",
-          borderBottom: "1px solid #d0d0d0",
-        }}
-      >
-        <Typography
-          variant="body2"
-          sx={{
-            fontFamily: "monospace",
-            color: "#333",
-            bgcolor: "white",
-            border: "1px solid #ccc",
-            borderRadius: 0.5,
-            px: 1.5,
-            py: 0.5,
-            flex: 1,
-            fontSize: "0.8rem",
-          }}
-        >
-          C:\{folder.title}\
-        </Typography>
-      </Box>
-
-      <Box
-        sx={{
           flex: 1,
           display: "flex",
           flexWrap: "wrap",
