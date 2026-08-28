@@ -1,3 +1,4 @@
+import WindowIcon from "@mui/icons-material/Window";
 import { Box, Typography, useTheme } from "@mui/material";
 import type React from "react";
 import { useEffect, useRef } from "react";
@@ -88,7 +89,7 @@ export default function Taskbar({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 22,
+          color: "white",
           cursor: "pointer",
           border: "none",
           borderRadius: 1,
@@ -101,7 +102,9 @@ export default function Taskbar({
           },
         }}
       >
-        🪟
+        {/* A real glyph rather than the 🪟 emoji, whose shape and colour are
+            decided by each platform's emoji font. */}
+        <WindowIcon sx={{ fontSize: 24 }} />
       </Box>
 
       <Box sx={{ flex: 1, display: "flex", gap: 0.5, justifyContent: "center" }}>

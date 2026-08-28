@@ -6,8 +6,6 @@ import { useMenuKeyboard } from "../hooks/useMenuKeyboard";
 import type { DesktopItem, StartMenuProps } from "../types/desktop";
 import { stripExtension } from "../utils/stripExtension";
 
-const RECENT_LIMIT = 4;
-
 function resolveItems(itemIds: string[]): DesktopItem[] {
   const items: DesktopItem[] = [];
   for (const itemId of itemIds) {
@@ -17,18 +15,10 @@ function resolveItems(itemIds: string[]): DesktopItem[] {
   return items;
 }
 
-export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: StartMenuProps) {
+export default function StartMenu({ isOpen, onOpenItem, onClose }: StartMenuProps) {
   const pinnedItems = resolveItems(PINNED_IDS);
-  // An item already pinned would otherwise show twice, and "welcome" (auto-opened
-  // on load, and pinned) would make "Récent" appear before the visitor does anything.
-  // The cap is applied after filtering: capping the raw journal first could evict
-  // enough non-pinned entries that the whole section flickers away.
-  const recentItems = resolveItems(recentIds)
-    .filter((item) => !PINNED_IDS.includes(item.id))
-    .slice(0, RECENT_LIMIT);
-  const allItems = [...pinnedItems, ...recentItems];
   const { registerItem, handleKeyDown } = useMenuKeyboard({
-    itemCount: allItems.length,
+    itemCount: pinnedItems.length,
     isOpen,
     onClose,
   });
@@ -117,25 +107,6 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
           </Typography>
           {pinnedItems.map((item, index) => renderItem(item, index))}
         </Box>
-
-        {recentItems.length > 0 && (
-          <Box role="group" aria-labelledby="start-menu-recent-heading" sx={{ mt: 1 }}>
-            <Typography
-              id="start-menu-recent-heading"
-              variant="caption"
-              sx={{
-                color: "rgba(255, 255, 255, 0.55)",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                px: 1.5,
-                display: "block",
-              }}
-            >
-              Récent
-            </Typography>
-            {recentItems.map((item, index) => renderItem(item, pinnedItems.length + index))}
-          </Box>
-        )}
       </Box>
     </motion.div>
   );

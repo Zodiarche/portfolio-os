@@ -75,11 +75,6 @@ export interface UseMenuKeyboardReturn {
   handleKeyDown: (event: React.KeyboardEvent) => void;
 }
 
-export interface UseRecentItemsReturn {
-  recentIds: string[];
-  recordOpen: (itemId: string) => void;
-}
-
 export interface UseDesktopMenusReturn {
   isStartMenuOpen: boolean;
   contextMenuPosition: Position | null;

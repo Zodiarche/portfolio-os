@@ -5,7 +5,6 @@ import { DesktopActionsProvider } from "../contexts/DesktopActionsContext";
 import { desktopItems, findItemById, WELCOME_ID } from "../data/icons";
 import { useDesktopMenus } from "../hooks/useDesktopMenus";
 import { useIconGrid } from "../hooks/useIconGrid";
-import { useRecentItems } from "../hooks/useRecentItems";
 import { useWindowManager } from "../hooks/useWindowManager";
 import type { DesktopActions, FileData, FolderData } from "../types/desktop";
 import DesktopContextMenu from "./DesktopContextMenu";
@@ -39,7 +38,6 @@ export default function Desktop() {
     handleBackgroundClick,
     handleBackgroundContextMenu,
   } = useDesktopMenus();
-  const { recentIds, recordOpen } = useRecentItems();
 
   const {
     windows,
@@ -53,7 +51,7 @@ export default function Desktop() {
     handleTaskbarWindowClick,
     handleAnimationComplete,
     getMinimizeTargetPosition,
-  } = useWindowManager(renderFolderContent, recordOpen);
+  } = useWindowManager(renderFolderContent);
 
   const desktopActions = useMemo<DesktopActions>(
     () => ({
@@ -134,7 +132,6 @@ export default function Desktop() {
 
       <StartMenu
         isOpen={isStartMenuOpen}
-        recentIds={recentIds}
         onOpenItem={desktopActions.openItemById}
         onClose={closeStartMenu}
       />

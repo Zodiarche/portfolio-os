@@ -53,7 +53,6 @@ export interface DesktopActions {
 
 export interface StartMenuProps {
   isOpen: boolean;
-  recentIds: string[];
   onOpenItem: (itemId: string) => void;
   onClose: () => void;
 }
