@@ -2,11 +2,12 @@ import { Box } from "@mui/material";
 import { useCallback, useEffect, useMemo } from "react";
 import { CELL_HEIGHT, GRID_PADDING } from "../constants/layout";
 import { DesktopActionsProvider } from "../contexts/DesktopActionsContext";
-import { desktopItems, findItemById, WELCOME_ID } from "../data/icons";
+import { CONTACT_ID, desktopItems, findItemById, WELCOME_ID } from "../data/icons";
 import { useDesktopMenus } from "../hooks/useDesktopMenus";
 import { useIconGrid } from "../hooks/useIconGrid";
 import { useWindowManager } from "../hooks/useWindowManager";
 import type { DesktopActions, FileData, FolderData } from "../types/desktop";
+import AvailabilityWidget from "./AvailabilityWidget";
 import DesktopContextMenu from "./DesktopContextMenu";
 import DesktopIcon from "./DesktopIcon";
 import FolderExplorer from "./FolderExplorer";
@@ -103,6 +104,10 @@ export default function Desktop() {
           />
         );
       })}
+
+      {/* Rendered before the windows so they paint over it, the way an OS
+          desktop widget sits under every open window. */}
+      <AvailabilityWidget onContact={() => desktopActions.openItemById(CONTACT_ID)} />
 
       <DesktopActionsProvider value={desktopActions}>
         {windows

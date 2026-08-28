@@ -2,7 +2,6 @@ import WindowIcon from "@mui/icons-material/Window";
 import { Box, Typography, useTheme } from "@mui/material";
 import type React from "react";
 import { useEffect, useRef } from "react";
-import { AVAILABILITY_LABEL } from "../constants/identity";
 import { TASKBAR_HEIGHT } from "../constants/layout";
 import { useClock } from "../hooks/useClock";
 import type { TaskbarProps } from "../types/desktop";
@@ -163,23 +162,6 @@ export default function Taskbar({
             </Box>
           </Box>
         ))}
-      </Box>
-
-      <Box
-        sx={{
-          display: { xs: "none", md: "flex" },
-          alignItems: "center",
-          height: 32,
-          px: 1.5,
-          mr: 1,
-          borderRadius: 1,
-          background: "rgba(255, 255, 255, 0.12)",
-          border: "1px solid rgba(255, 255, 255, 0.18)",
-        }}
-      >
-        <Typography variant="caption" color="white" noWrap>
-          {AVAILABILITY_LABEL}
-        </Typography>
       </Box>
 
       <Box

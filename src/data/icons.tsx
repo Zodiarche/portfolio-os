@@ -29,6 +29,7 @@ export function isFolder(item: DesktopItem): item is FolderData {
 }
 
 export const WELCOME_ID = "welcome";
+export const CONTACT_ID = "contact";
 
 /** Start menu pinned section: the four projects first, then the standalone entries. */
 export const PINNED_IDS = [
@@ -37,7 +38,7 @@ export const PINNED_IDS = [
   "project-maison-bsg",
   "project-pokemon-workshop",
   "skills",
-  "contact",
+  CONTACT_ID,
   "cv",
   WELCOME_ID,
 ];
@@ -119,7 +120,7 @@ export const desktopItems: DesktopItem[] = [
     component: SkillsPage,
   },
   {
-    id: "contact",
+    id: CONTACT_ID,
     title: "Contact.exe",
     icon: "✉️",
     component: ContactPage,
