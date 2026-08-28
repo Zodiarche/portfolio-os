@@ -592,20 +592,6 @@ export interface UseRecentItemsReturn {
 }
 ```
 
-Puis étendre `UseIconGridReturn` (utilisé à la tâche 5, déclaré ici pour rester en un seul endroit) :
-
-```ts
-export interface UseIconGridReturn {
-  iconPixelPositions: Map<string, Position>;
-  handleIconDragEnd: (
-    folderId: string,
-    event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo,
-  ) => void;
-  resetPositions: () => void;
-}
-```
-
 - [ ] **Step 2: Créer `src/hooks/useMenuKeyboard.ts`**
 
 Le comportement suit le patron APG « Menu » : Bas et Haut déplacent le focus avec bouclage, Début et Fin vont aux extrémités, Échap ferme, Tab ferme.
@@ -822,6 +808,9 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
         role="menu"
         aria-label="Menu démarrer"
         onKeyDown={handleKeyDown}
+        // The desktop background closes both menus on click; a click inside
+        // the menu must not reach it.
+        onClick={(event) => event.stopPropagation()}
         sx={{
           width: 300,
           p: 1.5,
@@ -989,7 +978,7 @@ et compléter la barre des tâches :
 />
 ```
 
-Le menu lui-même est un enfant du `<Box>` racine : ajouter `onClick={(event) => event.stopPropagation()}` sur le `<Box role="menu">` de `StartMenu.tsx`, sinon le clic sur un élément remonte au fond et referme le menu avant que l'ouverture ne s'exécute.
+Le `stopPropagation` du bouton démarrer et celui du `<Box role="menu">` (étape 6) sont tous deux nécessaires : sans eux, le clic remonte au fond du bureau qui referme le menu.
 
 - [ ] **Step 9: Vérifier**
 
@@ -1020,14 +1009,31 @@ git commit -m "feat(menu-demarrer): sections epingle et recent, navigation clavi
 **Files:**
 - Create: `src/components/DesktopContextMenu.tsx`
 - Modify: `src/hooks/useIconGrid.ts`
+- Modify: `src/types/hooks.ts`
 - Modify: `src/types/desktop.ts`
 - Modify: `src/components/Desktop.tsx`
 
 **Interfaces:**
-- Consumes: `useMenuKeyboard` (Task 4), `UseIconGridReturn.resetPositions` (type déclaré Task 4 Step 1).
-- Produces: `DesktopContextMenu` (props `DesktopContextMenuProps`).
+- Consumes: `useMenuKeyboard` (Task 4).
+- Produces: `DesktopContextMenu` (props `DesktopContextMenuProps`), `UseIconGridReturn.resetPositions`.
 
 - [ ] **Step 1: Exposer `resetPositions` depuis `src/hooks/useIconGrid.ts`**
+
+Le type et l'implémentation changent dans la même tâche, sinon `tsc` échoue sur un retour incomplet. Dans `src/types/hooks.ts`, compléter `UseIconGridReturn` :
+
+```ts
+export interface UseIconGridReturn {
+  iconPixelPositions: Map<string, Position>;
+  handleIconDragEnd: (
+    folderId: string,
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => void;
+  resetPositions: () => void;
+}
+```
+
+Puis, dans `src/hooks/useIconGrid.ts`, avant le `return` :
 
 ```ts
   const resetPositions = useCallback(() => {
