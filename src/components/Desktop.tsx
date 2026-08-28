@@ -30,6 +30,7 @@ export default function Desktop() {
   const {
     isStartMenuOpen,
     contextMenuPosition,
+    contextMenuOpenId,
     startButtonRef,
     toggleStartMenu,
     closeStartMenu,
@@ -141,8 +142,9 @@ export default function Desktop() {
       <DesktopContextMenu
         // A second right-click keeps `position` non-null, so the APG "focus the
         // first item" effect would not re-run and the keyboard cursor would stay
-        // where the previous open left it. Remounting on the new position resets it.
-        key={contextMenuPosition ? `${contextMenuPosition.x},${contextMenuPosition.y}` : "closed"}
+        // where the previous open left it. Remounting on each opening resets it,
+        // including a reopen on the very same pixel.
+        key={contextMenuOpenId}
         position={contextMenuPosition}
         onClose={closeContextMenu}
         onSortIcons={resetPositions}

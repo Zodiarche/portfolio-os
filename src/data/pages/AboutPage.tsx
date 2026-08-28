@@ -1,6 +1,6 @@
 import { Avatar, Box, Divider, Typography, useTheme } from "@mui/material";
 import { useMemo } from "react";
-import { IDENTITY_ROLE } from "../../constants/identity";
+import { IDENTITY_NAME, IDENTITY_ROLE } from "../../constants/identity";
 import { getAge } from "../../utils/getAge";
 
 export default function AboutPage() {
@@ -18,12 +18,12 @@ export default function AboutPage() {
       >
         <Avatar
           src="/photo.jpg"
-          alt="Benjamin Guillemin"
+          alt={IDENTITY_NAME}
           sx={{ width: 96, height: 96, border: `3px solid ${theme.palette.primary.main}` }}
         />
         <Box>
           <Typography variant="h4" fontWeight={700}>
-            Benjamin Guillemin
+            {IDENTITY_NAME}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
             {IDENTITY_ROLE}

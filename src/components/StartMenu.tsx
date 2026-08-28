@@ -86,6 +86,10 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
         // The desktop background closes both menus on click; a click inside
         // the menu must not reach it.
         onClick={(event) => event.stopPropagation()}
+        // Same reason for right-clicks: the background handler closes both menus
+        // before its own guard runs, so without this a right-click inside the menu
+        // would dismiss it and leave focus on a destroyed element.
+        onContextMenu={(event) => event.stopPropagation()}
         sx={{
           width: 300,
           maxHeight: `calc(100vh - ${TASKBAR_HEIGHT + 24}px)`,

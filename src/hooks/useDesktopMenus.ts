@@ -10,6 +10,7 @@ import type { Position } from "../types/window";
 export function useDesktopMenus(): UseDesktopMenusReturn {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState<Position | null>(null);
+  const [contextMenuOpenId, setContextMenuOpenId] = useState(0);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeContextMenu = useCallback(() => {
@@ -47,6 +48,10 @@ export function useDesktopMenus(): UseDesktopMenusReturn {
       if (event.target !== event.currentTarget) return;
       event.preventDefault();
       setContextMenuPosition({ x: event.clientX, y: event.clientY });
+      // Reopening never renders the closed state (both updates batch), so the
+      // menu cannot tell a reopen from a move by position alone: two right-clicks
+      // on the same pixel would look identical and skip the keyboard reset.
+      setContextMenuOpenId((previous) => previous + 1);
     },
     [closeBoth],
   );
@@ -54,6 +59,7 @@ export function useDesktopMenus(): UseDesktopMenusReturn {
   return {
     isStartMenuOpen,
     contextMenuPosition,
+    contextMenuOpenId,
     startButtonRef,
     toggleStartMenu,
     closeStartMenu,

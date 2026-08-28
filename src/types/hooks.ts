@@ -83,6 +83,8 @@ export interface UseRecentItemsReturn {
 export interface UseDesktopMenusReturn {
   isStartMenuOpen: boolean;
   contextMenuPosition: Position | null;
+  /** Increments on every context menu opening, so a reopen can be told from a move. */
+  contextMenuOpenId: number;
   startButtonRef: React.RefObject<HTMLButtonElement>;
   toggleStartMenu: () => void;
   closeStartMenu: () => void;
