@@ -61,7 +61,7 @@
 
 **Interfaces:**
 - Consumes: rien.
-- Produces: `FileData.subtitle?: string`, `FileData.stack?: string[]`, `flattenFiles(): FileData[]`, `findItemById(itemId: string): DesktopItem | undefined`, `WELCOME_ID`, `PINNED_IDS`.
+- Produces: `FileData.subtitle?: string`, `FileData.stack?: string[]`, `flattenFiles(): FileData[]`, `findItemById(itemId: string): DesktopItem | undefined`. (`WELCOME_ID` est produit par la tâche 3, `PINNED_IDS` par la tâche 4.)
 
 - [ ] **Step 1: Ajouter les deux champs optionnels au type `FileData`**
 
