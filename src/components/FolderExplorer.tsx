@@ -20,7 +20,9 @@ export default function FolderExplorer({ folder, onOpenFile }: FolderExplorerPro
         {fileCountLabel}
       </Box>
 
-      <Box sx={{ flex: 1, overflow: "auto", py: 0.5 }}>
+      {/* The file list only ever scrolls vertically: the 2px hover shift below
+          would otherwise widen the content and raise a horizontal scrollbar. */}
+      <Box sx={{ flex: 1, overflowY: "auto", overflowX: "hidden", py: 0.5 }}>
         {folder.files.map((file) => (
           // The motion props live on the row itself: wrapping it in a motion.div
           // instead makes framer-motion add tabIndex={0} to the wrapper for
