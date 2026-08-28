@@ -57,8 +57,13 @@ export default function OSWindow({
         setSize({ width: element.offsetWidth, height: element.offsetHeight });
         setPosition(newPosition);
       }}
-      minWidth={Math.round(window.innerWidth * MIN_WINDOW_SIZE_RATIO)}
-      minHeight={Math.round(window.innerHeight * MIN_WINDOW_SIZE_RATIO)}
+      // re-resizable writes these into the wrapper's CSS, so a viewport-relative
+      // minimum would inflate a window that asked for a smaller content size.
+      minWidth={Math.min(Math.round(window.innerWidth * MIN_WINDOW_SIZE_RATIO), initialSize.width)}
+      minHeight={Math.min(
+        Math.round(window.innerHeight * MIN_WINDOW_SIZE_RATIO),
+        initialSize.height,
+      )}
       bounds="parent"
       disableDragging={isMaximized}
       enableResizing={!isMaximized}

@@ -1,5 +1,5 @@
 import type { PanInfo } from "framer-motion";
-import type { Position, WindowData } from "./window";
+import type { Position, Size, WindowData } from "./window";
 
 export interface FileData {
   id: string;
@@ -10,6 +10,8 @@ export interface FileData {
   subtitle?: string;
   /** Main technologies, shown as the last column of the folder details view. */
   stack?: string[];
+  /** Opening size for pages whose content is far smaller than the default viewport ratio. */
+  windowSize?: Size;
 }
 
 export interface FolderData {

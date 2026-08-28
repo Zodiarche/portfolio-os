@@ -4,9 +4,9 @@ import { AVAILABILITY_LABEL, IDENTITY_LOCATION } from "../constants/identity";
 import { GRID_PADDING } from "../constants/layout";
 import type { AvailabilityWidgetProps } from "../types/desktop";
 
-// Widened any further, the widget would slip under the welcome window, which
-// opens centred at 70% of the viewport. 200px keeps it clear from 1440px up.
-const WIDGET_WIDTH = 200;
+// The welcome window opens centred at 600px wide, so this width stays clear of
+// it from the `lg` breakpoint up, which is where the widget starts showing.
+const WIDGET_WIDTH = 280;
 
 // Amber, not green: the status is "employed but open to freelance", so the
 // dot must not read as fully available the way an OS presence indicator does.
@@ -22,14 +22,14 @@ export default function AvailabilityWidget({ onContact }: AvailabilityWidgetProp
       transition={{ duration: 0.3, delay: 0.2 }}
       aria-label="Disponibilité"
       sx={{
-        // Hidden on narrow viewports: the welcome window takes 70% of the
-        // width and would cover the widget instead of sitting beside it.
-        display: { xs: "none", md: "block" },
+        // Hidden below `lg`: any narrower and the centred welcome window would
+        // cover the widget instead of sitting beside it.
+        display: { xs: "none", lg: "block" },
         position: "absolute",
         top: GRID_PADDING,
         right: GRID_PADDING,
         width: WIDGET_WIDTH,
-        p: 2,
+        p: 2.5,
         borderRadius: 2,
         // Dark glass, like the start menu: the taskbar's white glass only works
         // over the wallpaper's dark lower half, and this corner is bright sky.
@@ -40,12 +40,12 @@ export default function AvailabilityWidget({ onContact }: AvailabilityWidgetProp
         userSelect: "none",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1.25 }}>
         <Box
           aria-hidden
           sx={{
-            width: 8,
-            height: 8,
+            width: 10,
+            height: 10,
             borderRadius: "50%",
             background: STATUS_DOT_COLOR,
             boxShadow: `0 0 8px ${STATUS_DOT_COLOR}`,
@@ -64,14 +64,14 @@ export default function AvailabilityWidget({ onContact }: AvailabilityWidgetProp
         </Typography>
       </Box>
 
-      <Typography variant="body2" color="white" fontWeight={600}>
+      <Typography variant="body1" color="white" fontWeight={600} sx={{ lineHeight: 1.35 }}>
         {AVAILABILITY_LABEL}
       </Typography>
-      <Typography variant="caption" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+      <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)", mt: 0.25 }}>
         {IDENTITY_LOCATION}
       </Typography>
 
-      <Button variant="contained" size="small" fullWidth sx={{ mt: 2 }} onClick={onContact}>
+      <Button variant="contained" fullWidth sx={{ mt: 2.5 }} onClick={onContact}>
         Me contacter
       </Button>
     </Box>

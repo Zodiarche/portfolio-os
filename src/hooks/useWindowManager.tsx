@@ -4,7 +4,7 @@ import { TASKBAR_HEIGHT, WINDOW_CASCADE_OFFSET, WINDOW_SIZE_RATIO } from "../con
 import { isFolder } from "../data/icons";
 import type { DesktopItem, FileData, FolderData } from "../types/desktop";
 import type { RenderFolderContent, UseWindowManagerReturn } from "../types/hooks";
-import type { Position, WindowData } from "../types/window";
+import type { Position, Size, WindowData } from "../types/window";
 
 /** Creates a centered WindowData with cascading offset based on existing window count. */
 function createWindowData(
@@ -13,9 +13,20 @@ function createWindowData(
   icon: string,
   component: React.ReactNode,
   existingCount: number,
+  preferredSize?: Size,
 ): WindowData {
-  const width = Math.round(window.innerWidth * WINDOW_SIZE_RATIO);
-  const height = Math.round((window.innerHeight - TASKBAR_HEIGHT) * WINDOW_SIZE_RATIO);
+  const availableHeight = window.innerHeight - TASKBAR_HEIGHT;
+
+  // A page can ask for the size its content actually needs; without one, the
+  // window falls back to a share of the viewport. Never larger than the desktop.
+  const width = Math.min(
+    preferredSize?.width ?? Math.round(window.innerWidth * WINDOW_SIZE_RATIO),
+    window.innerWidth,
+  );
+  const height = Math.min(
+    preferredSize?.height ?? Math.round(availableHeight * WINDOW_SIZE_RATIO),
+    availableHeight,
+  );
 
   return {
     id,
@@ -24,9 +35,7 @@ function createWindowData(
     component,
     position: {
       x: Math.round((window.innerWidth - width) / 2) + existingCount * WINDOW_CASCADE_OFFSET,
-      y:
-        Math.round((window.innerHeight - TASKBAR_HEIGHT - height) / 2) +
-        existingCount * WINDOW_CASCADE_OFFSET,
+      y: Math.round((availableHeight - height) / 2) + existingCount * WINDOW_CASCADE_OFFSET,
     },
     size: { width, height },
   };
@@ -44,7 +53,14 @@ export function useWindowManager(renderFolderContent: RenderFolderContent): UseW
       const FileComponent = file.component;
       return [
         ...previous,
-        createWindowData(file.id, file.title, file.icon, <FileComponent />, previous.length),
+        createWindowData(
+          file.id,
+          file.title,
+          file.icon,
+          <FileComponent />,
+          previous.length,
+          file.windowSize,
+        ),
       ];
     });
     setActiveWindow(file.id);

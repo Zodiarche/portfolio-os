@@ -31,6 +31,9 @@ export function isFolder(item: DesktopItem): item is FolderData {
 export const WELCOME_ID = "welcome";
 export const CONTACT_ID = "contact";
 
+/** Fits WelcomePage's 560px column plus the window chrome: a viewport ratio would dwarf it. */
+const WELCOME_WINDOW_SIZE = { width: 600, height: 290 };
+
 /** Start menu pinned section: the four projects first, then the standalone entries. */
 export const PINNED_IDS = [
   "project-minitroopers",
@@ -49,6 +52,7 @@ export const desktopItems: DesktopItem[] = [
     title: "Bienvenue",
     icon: "👋",
     component: WelcomePage,
+    windowSize: WELCOME_WINDOW_SIZE,
   },
   {
     id: "folder-about",
