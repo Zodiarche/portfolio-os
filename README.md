@@ -32,7 +32,7 @@ Portfolio interactif conçu comme un système d'exploitation. Chaque section s'o
 ### Contenu
 
 - Page « À propos » et CV intégré en PDF
-- Vitrine de projets (Keystone, Portfolio OS, La Maison BSG, Pokémon Workshop)
+- Vitrine de projets (Minitroopers, Portfolio OS, La Maison BSG, Pokémon Workshop)
 - Page de compétences
 - Formulaire de contact
 
@@ -96,6 +96,6 @@ public/
 ## Auteur
 
 **Benjamin Guillemin** — Développeur fullstack web & mobile, basé à Bordeaux.
-TypeScript / React / Next.js / Node.js / React Native, et Rust / Tauri sur [Keystone](https://keystone.guillemin.dev).
+TypeScript / React / Next.js / Node.js / React Native.
 
 Portfolio : [guillemin.dev](https://guillemin.dev) · CV : [guillemin.dev/cv.pdf](https://guillemin.dev/cv.pdf) · [LinkedIn](https://www.linkedin.com/in/benjamin-guillemin)

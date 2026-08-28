@@ -7,9 +7,6 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const CVPage = lazy(() => import("./pages/CVPage"));
 const SkillsPage = lazy(() => import("./pages/SkillsPage"));
-const KeystoneProject = lazy(() =>
-  import("./pages/KeystoneProject").then((module) => ({ default: module.KeystoneProject })),
-);
 const MaisonBSGProject = lazy(() =>
   import("./pages/MaisonBSGProject").then((module) => ({ default: module.MaisonBSGProject })),
 );
@@ -55,12 +52,6 @@ export const desktopItems: DesktopItem[] = [
     title: "Mes Projets",
     icon: "💼",
     files: [
-      {
-        id: "project-keystone",
-        title: "Keystone.exe",
-        icon: "🗝️",
-        component: KeystoneProject,
-      },
       {
         id: "project-minitroopers",
         title: "Minitroopers.exe",
