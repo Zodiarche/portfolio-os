@@ -6,6 +6,8 @@ import { useMenuKeyboard } from "../hooks/useMenuKeyboard";
 import type { DesktopItem, StartMenuProps } from "../types/desktop";
 import { stripExtension } from "../utils/stripExtension";
 
+const RECENT_LIMIT = 4;
+
 function resolveItems(itemIds: string[]): DesktopItem[] {
   const items: DesktopItem[] = [];
   for (const itemId of itemIds) {
@@ -19,7 +21,11 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
   const pinnedItems = resolveItems(PINNED_IDS);
   // An item already pinned would otherwise show twice, and "welcome" (auto-opened
   // on load, and pinned) would make "Récent" appear before the visitor does anything.
-  const recentItems = resolveItems(recentIds).filter((item) => !PINNED_IDS.includes(item.id));
+  // The cap is applied after filtering: capping the raw journal first could evict
+  // enough non-pinned entries that the whole section flickers away.
+  const recentItems = resolveItems(recentIds)
+    .filter((item) => !PINNED_IDS.includes(item.id))
+    .slice(0, RECENT_LIMIT);
   const allItems = [...pinnedItems, ...recentItems];
   const { registerItem, handleKeyDown } = useMenuKeyboard({
     itemCount: allItems.length,
