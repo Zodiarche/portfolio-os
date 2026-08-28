@@ -11,8 +11,8 @@ icônes sur un fond d'écran, et les dossiers ouvrent une grille de deux à quat
 icônes dans un cadre vide. Le diagnostic n'est pas une question de goût, il se
 formule sur des règles documentées :
 
-- Le premier écran ne porte aucune proposition de valeur, alors que l'audience
-  visée (recruteurs) décide en 10 à 20 secondes.
+- Le premier écran ne porte aucune proposition de valeur, alors qu'un visiteur
+  décide en 10 à 20 secondes.
 - Le bureau et les dossiers sont des conteneurs sans contenu : ils échouent aux
   trois règles NN/g sur les états vides (statut du système, découverte des
   fonctionnalités, chemins directs vers les tâches clés).
@@ -62,7 +62,7 @@ déplaçable, réductible, maximisable, fermable, et listée dans la taskbar com
 les autres. Aucun composant de fenêtre nouveau.
 
 Contenu : nom, rôle, ville, une phrase de positionnement, puis deux actions
-directes (ouvrir `Mes Projets`, ouvrir `CV.pdf`).
+directes (ouvrir `Mes Projets`, ouvrir `CV.pdf`). Textes arrêtés en 6.1.
 
 Elle est rouverte à chaque visite, sans mémorisation en `localStorage`. Ce n'est
 pas un tour d'onboarding mais le contenu principal de l'écran ; le coût pour un
@@ -171,18 +171,45 @@ Non touchés : `src/data/pages/ProjectPage.tsx`, `src/types/data.ts`,
 
 ## 6. Contraintes éditoriales
 
-Règle d'`AGENTS.md` : une affirmation égale un fait fourni. Les contenus
-suivants doivent venir de l'utilisateur ou être repris tels quels des pages
-projets existantes sous `src/data/pages/`, jamais inventés ni reformulés en
-avantage :
-
-- Le pitch d'une ligne et la stack de chacun des 4 projets, plus des entrées
-  `À propos.txt` et `CV.pdf`.
-- Le texte de la fenêtre d'accueil (rôle, ville, phrase de positionnement).
-- Le libellé du bloc de disponibilité.
+Règle d'`AGENTS.md` : une affirmation égale un fait fourni. Tous les contenus
+ci-dessous sont soit repris des pages existantes sous `src/data/pages/`, soit
+fournis par l'utilisateur. Rien n'est inventé ni reformulé en avantage.
 
 Français avec accents corrects, sans tiret cadratin ni emoji dans les textes
 rédigés. Les commentaires de code restent en anglais.
+
+### 6.1 Fenêtre d'accueil
+
+Identité reprise de `AboutPage.tsx:24-32` : Benjamin Guillemin, Développeur
+Fullstack Web & Mobile, Bordeaux, France.
+
+Accroche, fournie par l'utilisateur : « Je construis des applications web et
+mobiles, du serveur à l'interface. » Étayée par La Maison BSG (API, site web et
+application mobile) et Minitroopers (client et serveur).
+
+Actions : « Voir les projets », « Ouvrir le CV ».
+
+### 6.2 Pitchs et stacks des lignes de dossier
+
+Condensés des `subtitle` et `tech` déjà présents dans `src/data/pages/`.
+
+| Entrée | Pitch | Stack |
+| --- | --- | --- |
+| `Minitroopers.exe` | Jeu de gestion d'armée Flash reconstruit sur une stack moderne, combat d'époque rejoué via Ruffle | React, Node.js, PostgreSQL, Ruffle |
+| `Portfolio OS.exe` | Ce bureau : un portfolio conçu comme un système d'exploitation, sans librairie de navigation | React, TypeScript, Vite |
+| `La Maison BSG.exe` | Boutique artisanale en ligne : une API, un site web et une application mobile dans un même monorepo | Next.js, Fastify, Expo |
+| `Pokémon Workshop.exe` | Écosystème open-source de création de jeux, Core Contributor & Community Lead | Ruby, TypeScript, Electron |
+| `À propos.txt` | Parcours, ce qui me motive, ce que je cherche | aucune |
+| `CV.pdf` | Mon CV en une page | aucune |
+
+### 6.3 Bloc de disponibilité
+
+Statut fourni par l'utilisateur le 28/08/2026 : en poste en CDI, et ouvert à des
+missions freelance faute de temps saturé. Libellé retenu, calibré pour la
+largeur de la barre des tâches : « En poste, ouvert au freelance ».
+
+Ce statut périme le registre « candidat en recherche » : aucun texte de cette
+spec ne doit présenter le portfolio comme un support de candidature active.
 
 ## 7. Definition of Done
 
@@ -200,7 +227,9 @@ rédigés. Les commentaires de code restent en anglais.
 
 ## 8. Points ouverts
 
-- Contenus de la section 6 : à fournir avant implémentation, sinon
-  l'implémentation s'arrête là (règle anti-invention d'`AGENTS.md`).
-- Le badge unique de 4.2 : utile seulement s'il existe une situation qui le
-  mérite. À trancher quand les pitchs seront connus, faute de quoi zéro badge.
+- Aucun contenu manquant : la section 6 est close.
+- Le badge unique de 4.2 : aucune des six entrées ne relève d'une situation
+  assez spéciale pour le justifier. Décision par défaut, zéro badge.
+- Hors périmètre de cette spec, mais constaté au passage : le CV et les pages du
+  portfolio ont été écrits pendant la période de recherche active. Leur registre
+  n'a pas été relu à la lumière du statut de 6.3.
