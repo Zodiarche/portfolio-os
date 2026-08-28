@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { CELL_HEIGHT, GRID_PADDING } from "../constants/layout";
-import { desktopItems } from "../data/icons";
+import { DesktopActionsProvider } from "../contexts/DesktopActionsContext";
+import { desktopItems, findItemById, WELCOME_ID } from "../data/icons";
 import { useIconGrid } from "../hooks/useIconGrid";
 import { useWindowManager } from "../hooks/useWindowManager";
-import type { FileData, FolderData } from "../types/desktop";
+import type { DesktopActions, FileData, FolderData } from "../types/desktop";
 import DesktopIcon from "./DesktopIcon";
 import FolderExplorer from "./FolderExplorer";
 import OSWindow from "./OSWindow";
@@ -35,6 +36,24 @@ export default function Desktop() {
     handleAnimationComplete,
     getMinimizeTargetPosition,
   } = useWindowManager(renderFolderContent);
+
+  const desktopActions = useMemo<DesktopActions>(
+    () => ({
+      openItemById: (itemId: string) => {
+        const item = findItemById(itemId);
+        if (!item) return;
+        handleItemClick(item);
+      },
+    }),
+    [handleItemClick],
+  );
+
+  // The welcome window is the landing content, reopened on every visit.
+  // StrictMode runs this twice in dev; the window manager ignores duplicate ids.
+  useEffect(() => {
+    const welcome = findItemById(WELCOME_ID);
+    if (welcome) handleItemClick(welcome);
+  }, [handleItemClick]);
 
   return (
     <Box
@@ -67,29 +86,31 @@ export default function Desktop() {
         );
       })}
 
-      {windows
-        .filter((windowItem) => !windowItem.isMinimized)
-        .map((windowItem) => (
-          <OSWindow
-            key={windowItem.id}
-            id={windowItem.id}
-            title={windowItem.title}
-            icon={windowItem.icon}
-            initialPosition={windowItem.position}
-            initialSize={windowItem.size}
-            isActive={activeWindow === windowItem.id}
-            isMaximized={windowItem.isMaximized || false}
-            animationState={windowItem.animationState || "idle"}
-            minimizeTargetPosition={getMinimizeTargetPosition(windowItem.id)}
-            onClose={() => handleCloseWindow(windowItem.id)}
-            onMinimize={() => handleMinimizeWindow(windowItem.id)}
-            onMaximize={() => handleMaximizeWindow(windowItem.id)}
-            onFocus={() => setActiveWindow(windowItem.id)}
-            onAnimationComplete={() => handleAnimationComplete(windowItem.id)}
-          >
-            {windowItem.component}
-          </OSWindow>
-        ))}
+      <DesktopActionsProvider value={desktopActions}>
+        {windows
+          .filter((windowItem) => !windowItem.isMinimized)
+          .map((windowItem) => (
+            <OSWindow
+              key={windowItem.id}
+              id={windowItem.id}
+              title={windowItem.title}
+              icon={windowItem.icon}
+              initialPosition={windowItem.position}
+              initialSize={windowItem.size}
+              isActive={activeWindow === windowItem.id}
+              isMaximized={windowItem.isMaximized || false}
+              animationState={windowItem.animationState || "idle"}
+              minimizeTargetPosition={getMinimizeTargetPosition(windowItem.id)}
+              onClose={() => handleCloseWindow(windowItem.id)}
+              onMinimize={() => handleMinimizeWindow(windowItem.id)}
+              onMaximize={() => handleMaximizeWindow(windowItem.id)}
+              onFocus={() => setActiveWindow(windowItem.id)}
+              onAnimationComplete={() => handleAnimationComplete(windowItem.id)}
+            >
+              {windowItem.component}
+            </OSWindow>
+          ))}
+      </DesktopActionsProvider>
 
       <Taskbar
         windows={windows}

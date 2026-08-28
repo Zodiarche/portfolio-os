@@ -21,13 +21,22 @@ const PokemonWorkshopProject = lazy(() =>
 const PortfolioProject = lazy(() =>
   import("./pages/ProjectPage").then((module) => ({ default: module.PortfolioProject })),
 );
+const WelcomePage = lazy(() => import("./pages/WelcomePage"));
 
 /** Type guard to distinguish folders (with nested files) from standalone files. */
 export function isFolder(item: DesktopItem): item is FolderData {
   return "files" in item;
 }
 
+export const WELCOME_ID = "welcome";
+
 export const desktopItems: DesktopItem[] = [
+  {
+    id: WELCOME_ID,
+    title: "Bienvenue",
+    icon: "👋",
+    component: WelcomePage,
+  },
   {
     id: "folder-about",
     title: "À propos",

@@ -41,3 +41,8 @@ export interface TaskbarProps {
   onWindowClick: (windowId: string) => void;
   onIconPositionsUpdate?: (positions: Map<string, DOMRect>) => void;
 }
+
+export interface DesktopActions {
+  /** Opens any desktop item by id, from a page rendered inside a window. */
+  openItemById: (itemId: string) => void;
+}

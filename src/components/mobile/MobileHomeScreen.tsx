@@ -1,9 +1,10 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import { flattenFiles } from "../../data/icons";
+import { flattenFiles, WELCOME_ID } from "../../data/icons";
 import type { MobileHomeScreenProps } from "../../types/mobile";
 import { stripExtension } from "../../utils/stripExtension";
 
-const allFiles = flattenFiles();
+// The welcome content is rendered as a header on mobile, not as an app icon.
+const allFiles = flattenFiles().filter((file) => file.id !== WELCOME_ID);
 
 export default function MobileHomeScreen({ onOpenFile }: MobileHomeScreenProps) {
   const theme = useTheme();
