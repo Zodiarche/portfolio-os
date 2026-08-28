@@ -1,22 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import { desktopItems, isFolder } from "../../data/icons";
-import type { FileData } from "../../types/desktop";
+import { flattenFiles } from "../../data/icons";
 import type { MobileHomeScreenProps } from "../../types/mobile";
 import { stripExtension } from "../../utils/stripExtension";
 
-function flattenItems(): FileData[] {
-  const files: FileData[] = [];
-  for (const item of desktopItems) {
-    if (isFolder(item)) {
-      files.push(...item.files);
-    } else {
-      files.push(item);
-    }
-  }
-  return files;
-}
-
-const allFiles = flattenItems();
+const allFiles = flattenFiles();
 
 export default function MobileHomeScreen({ onOpenFile }: MobileHomeScreenProps) {
   const theme = useTheme();

@@ -6,6 +6,10 @@ export interface FileData {
   title: string;
   icon: string;
   component: React.ComponentType;
+  /** One-line pitch shown in the folder details view. Absent for entries that have none. */
+  subtitle?: string;
+  /** Main technologies, shown as the last column of the folder details view. */
+  stack?: string[];
 }
 
 export interface FolderData {
