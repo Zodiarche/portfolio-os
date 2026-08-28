@@ -33,22 +33,29 @@ function createWindowData(
 }
 
 /** Manages window lifecycle: open, close, minimize, maximize, and taskbar interactions. */
-export function useWindowManager(renderFolderContent: RenderFolderContent): UseWindowManagerReturn {
+export function useWindowManager(
+  renderFolderContent: RenderFolderContent,
+  onWindowOpened?: (itemId: string) => void,
+): UseWindowManagerReturn {
   const [windows, setWindows] = useState<WindowData[]>([]);
   const [activeWindow, setActiveWindow] = useState<string | null>(null);
   const [iconPositions, setIconPositions] = useState<Map<string, DOMRect>>(new Map());
 
-  const handleOpenFile = useCallback((file: FileData) => {
-    setWindows((previous) => {
-      if (previous.find((windowItem) => windowItem.id === file.id)) return previous;
-      const FileComponent = file.component;
-      return [
-        ...previous,
-        createWindowData(file.id, file.title, file.icon, <FileComponent />, previous.length),
-      ];
-    });
-    setActiveWindow(file.id);
-  }, []);
+  const handleOpenFile = useCallback(
+    (file: FileData) => {
+      setWindows((previous) => {
+        if (previous.find((windowItem) => windowItem.id === file.id)) return previous;
+        const FileComponent = file.component;
+        return [
+          ...previous,
+          createWindowData(file.id, file.title, file.icon, <FileComponent />, previous.length),
+        ];
+      });
+      setActiveWindow(file.id);
+      onWindowOpened?.(file.id);
+    },
+    [onWindowOpened],
+  );
 
   const handleItemClick = useCallback(
     (item: DesktopItem) => {
@@ -62,11 +69,12 @@ export function useWindowManager(renderFolderContent: RenderFolderContent): UseW
           ];
         });
         setActiveWindow(item.id);
+        onWindowOpened?.(item.id);
       } else {
         handleOpenFile(item);
       }
     },
-    [handleOpenFile, renderFolderContent],
+    [handleOpenFile, onWindowOpened, renderFolderContent],
   );
 
   const handleCloseWindow = useCallback((windowId: string) => {

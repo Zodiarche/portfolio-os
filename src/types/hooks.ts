@@ -62,3 +62,19 @@ export type RenderFolderContent = (
   folder: FolderData,
   openFile: (file: FileData) => void,
 ) => React.ReactNode;
+
+export interface UseMenuKeyboardOptions {
+  itemCount: number;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export interface UseMenuKeyboardReturn {
+  registerItem: (index: number, element: HTMLElement | null) => void;
+  handleKeyDown: (event: React.KeyboardEvent) => void;
+}
+
+export interface UseRecentItemsReturn {
+  recentIds: string[];
+  recordOpen: (itemId: string) => void;
+}

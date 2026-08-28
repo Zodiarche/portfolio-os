@@ -1,4 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
+import type React from "react";
 import { useEffect, useRef } from "react";
 import { TASKBAR_HEIGHT } from "../constants/layout";
 import { useClock } from "../hooks/useClock";
@@ -7,6 +8,9 @@ import type { TaskbarProps } from "../types/desktop";
 export default function Taskbar({
   windows,
   activeWindow,
+  isStartMenuOpen,
+  startButtonRef,
+  onStartMenuToggle,
   onWindowClick,
   onIconPositionsUpdate,
 }: TaskbarProps) {
@@ -63,6 +67,42 @@ export default function Taskbar({
         userSelect: "none",
       }}
     >
+      <Box
+        component="button"
+        type="button"
+        ref={startButtonRef}
+        aria-haspopup="menu"
+        aria-expanded={isStartMenuOpen}
+        aria-label="Menu démarrer"
+        onClick={(event: React.MouseEvent) => {
+          // The desktop background closes both menus on click; without this the
+          // toggle would immediately reopen-then-close.
+          event.stopPropagation();
+          onStartMenuToggle();
+        }}
+        sx={{
+          width: 44,
+          height: 44,
+          flexShrink: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 22,
+          cursor: "pointer",
+          border: "none",
+          borderRadius: 1,
+          background: isStartMenuOpen ? "rgba(255, 255, 255, 0.22)" : "transparent",
+          transition: "background 0.2s ease",
+          "&:hover": { background: "rgba(255, 255, 255, 0.14)" },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.secondary.main}`,
+            outlineOffset: 2,
+          },
+        }}
+      >
+        🪟
+      </Box>
+
       <Box sx={{ flex: 1, display: "flex", gap: 0.5, justifyContent: "center" }}>
         {windows.map((window) => (
           <Box

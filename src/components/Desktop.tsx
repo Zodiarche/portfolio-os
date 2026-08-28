@@ -1,14 +1,16 @@
 import { Box } from "@mui/material";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CELL_HEIGHT, GRID_PADDING } from "../constants/layout";
 import { DesktopActionsProvider } from "../contexts/DesktopActionsContext";
 import { desktopItems, findItemById, WELCOME_ID } from "../data/icons";
 import { useIconGrid } from "../hooks/useIconGrid";
+import { useRecentItems } from "../hooks/useRecentItems";
 import { useWindowManager } from "../hooks/useWindowManager";
 import type { DesktopActions, FileData, FolderData } from "../types/desktop";
 import DesktopIcon from "./DesktopIcon";
 import FolderExplorer from "./FolderExplorer";
 import OSWindow from "./OSWindow";
+import StartMenu from "./StartMenu";
 import Taskbar from "./Taskbar";
 
 const itemIds = desktopItems.map((item) => item.id);
@@ -23,6 +25,16 @@ export default function Desktop() {
     [],
   );
 
+  const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+  const { recentIds, recordOpen } = useRecentItems();
+
+  // APG: closing a menu returns focus to the button that opened it.
+  const closeStartMenu = useCallback(() => {
+    setIsStartMenuOpen(false);
+    startButtonRef.current?.focus();
+  }, []);
+
   const {
     windows,
     activeWindow,
@@ -35,7 +47,7 @@ export default function Desktop() {
     handleTaskbarWindowClick,
     handleAnimationComplete,
     getMinimizeTargetPosition,
-  } = useWindowManager(renderFolderContent);
+  } = useWindowManager(renderFolderContent, recordOpen);
 
   const desktopActions = useMemo<DesktopActions>(
     () => ({
@@ -57,6 +69,7 @@ export default function Desktop() {
 
   return (
     <Box
+      onClick={() => setIsStartMenuOpen(false)}
       sx={{
         width: "100vw",
         height: "100vh",
@@ -112,9 +125,19 @@ export default function Desktop() {
           ))}
       </DesktopActionsProvider>
 
+      <StartMenu
+        isOpen={isStartMenuOpen}
+        recentIds={recentIds}
+        onOpenItem={desktopActions.openItemById}
+        onClose={closeStartMenu}
+      />
+
       <Taskbar
         windows={windows}
         activeWindow={activeWindow}
+        isStartMenuOpen={isStartMenuOpen}
+        startButtonRef={startButtonRef}
+        onStartMenuToggle={() => setIsStartMenuOpen((previous) => !previous)}
         onWindowClick={handleTaskbarWindowClick}
         onIconPositionsUpdate={setIconPositions}
       />

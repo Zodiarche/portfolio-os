@@ -38,6 +38,10 @@ export interface FolderExplorerProps {
 export interface TaskbarProps {
   windows: WindowData[];
   activeWindow: string | null;
+  isStartMenuOpen: boolean;
+  /** Owned by Desktop, which restores focus here when the start menu closes (APG). */
+  startButtonRef: React.RefObject<HTMLButtonElement>;
+  onStartMenuToggle: () => void;
   onWindowClick: (windowId: string) => void;
   onIconPositionsUpdate?: (positions: Map<string, DOMRect>) => void;
 }
@@ -45,4 +49,11 @@ export interface TaskbarProps {
 export interface DesktopActions {
   /** Opens any desktop item by id, from a page rendered inside a window. */
   openItemById: (itemId: string) => void;
+}
+
+export interface StartMenuProps {
+  isOpen: boolean;
+  recentIds: string[];
+  onOpenItem: (itemId: string) => void;
+  onClose: () => void;
 }
