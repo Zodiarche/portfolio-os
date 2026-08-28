@@ -17,7 +17,9 @@ function resolveItems(itemIds: string[]): DesktopItem[] {
 
 export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: StartMenuProps) {
   const pinnedItems = resolveItems(PINNED_IDS);
-  const recentItems = resolveItems(recentIds);
+  // An item already pinned would otherwise show twice, and "welcome" (auto-opened
+  // on load, and pinned) would make "Récent" appear before the visitor does anything.
+  const recentItems = resolveItems(recentIds).filter((item) => !PINNED_IDS.includes(item.id));
   const allItems = [...pinnedItems, ...recentItems];
   const { registerItem, handleKeyDown } = useMenuKeyboard({
     itemCount: allItems.length,
@@ -80,6 +82,8 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
         onClick={(event) => event.stopPropagation()}
         sx={{
           width: 300,
+          maxHeight: `calc(100vh - ${TASKBAR_HEIGHT + 24}px)`,
+          overflowY: "auto",
           p: 1.5,
           borderRadius: 2,
           background: "rgba(20, 24, 34, 0.92)",
@@ -88,36 +92,39 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
           boxShadow: "0 12px 40px rgba(0, 0, 0, 0.45)",
         }}
       >
-        <Typography
-          variant="caption"
-          sx={{
-            color: "rgba(255, 255, 255, 0.55)",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            px: 1.5,
-          }}
-        >
-          Épinglé
-        </Typography>
-        {pinnedItems.map((item, index) => renderItem(item, index))}
+        <Box role="group" aria-labelledby="start-menu-pinned-heading">
+          <Typography
+            id="start-menu-pinned-heading"
+            variant="caption"
+            sx={{
+              color: "rgba(255, 255, 255, 0.55)",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              px: 1.5,
+            }}
+          >
+            Épinglé
+          </Typography>
+          {pinnedItems.map((item, index) => renderItem(item, index))}
+        </Box>
 
         {recentItems.length > 0 && (
-          <>
+          <Box role="group" aria-labelledby="start-menu-recent-heading" sx={{ mt: 1 }}>
             <Typography
+              id="start-menu-recent-heading"
               variant="caption"
               sx={{
                 color: "rgba(255, 255, 255, 0.55)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 px: 1.5,
-                mt: 1,
                 display: "block",
               }}
             >
               Récent
             </Typography>
             {recentItems.map((item, index) => renderItem(item, pinnedItems.length + index))}
-          </>
+          </Box>
         )}
       </Box>
     </motion.div>
