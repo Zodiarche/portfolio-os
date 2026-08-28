@@ -1,24 +1,28 @@
-import { alpha, Box, Typography, useTheme } from "@mui/material";
+import { alpha, Box, Chip, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import type { FolderExplorerProps } from "../types/desktop";
 
 export default function FolderExplorer({ folder, onOpenFile }: FolderExplorerProps) {
   const theme = useTheme();
+  const fileCountLabel = `${folder.files.length} élément${folder.files.length > 1 ? "s" : ""}`;
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <Box
         sx={{
-          flex: 1,
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-          p: 2,
-          alignContent: "flex-start",
+          px: 2,
+          py: 1,
+          borderBottom: "1px solid #e0e0e0",
+          color: "text.secondary",
+          fontSize: "0.75rem",
         }}
       >
+        {fileCountLabel}
+      </Box>
+
+      <Box sx={{ flex: 1, overflow: "auto", py: 0.5 }}>
         {folder.files.map((file) => (
-          <motion.div key={file.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div key={file.id} whileHover={{ x: 2 }} whileTap={{ scale: 0.995 }}>
             <Box
               role="button"
               tabIndex={0}
@@ -32,37 +36,54 @@ export default function FolderExplorer({ folder, onOpenFile }: FolderExplorerPro
               }}
               sx={{
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
-                gap: 0.5,
+                gap: 1.5,
+                px: 2,
+                py: 1.25,
                 cursor: "pointer",
                 userSelect: "none",
                 outline: "none",
                 "&:focus-visible": {
                   outline: `2px solid ${theme.palette.primary.main}`,
-                  outlineOffset: 2,
+                  outlineOffset: -2,
                 },
-                width: 110,
-                padding: 1,
-                borderRadius: 1.5,
                 "&:hover": {
                   bgcolor: alpha(theme.palette.primary.main, 0.08),
                 },
               }}
             >
-              <Box sx={{ fontSize: 44 }}>{file.icon}</Box>
-              <Typography
-                variant="caption"
-                sx={{
-                  textAlign: "center",
-                  color: "#333",
-                  fontSize: "0.75rem",
-                  lineHeight: 1.2,
-                  wordBreak: "break-word",
-                }}
-              >
-                {file.title}
-              </Typography>
+              <Box sx={{ fontSize: 28, flexShrink: 0 }}>{file.icon}</Box>
+
+              <Box sx={{ minWidth: 0, flex: 1 }}>
+                <Typography variant="body2" sx={{ color: "#222", fontWeight: 600 }}>
+                  {file.title}
+                </Typography>
+                {file.subtitle && (
+                  <Typography
+                    variant="caption"
+                    sx={{ color: "text.secondary", display: "block", lineHeight: 1.35 }}
+                  >
+                    {file.subtitle}
+                  </Typography>
+                )}
+              </Box>
+
+              {file.stack && (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "flex-end",
+                    gap: 0.5,
+                    maxWidth: 220,
+                    flexShrink: 0,
+                  }}
+                >
+                  {file.stack.map((technology) => (
+                    <Chip key={technology} label={technology} size="small" />
+                  ))}
+                </Box>
+              )}
             </Box>
           </motion.div>
         ))}
