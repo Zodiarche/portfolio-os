@@ -77,6 +77,7 @@ export default function Desktop() {
         setContextMenuPosition(null);
       }}
       onContextMenu={(event) => {
+        setContextMenuPosition(null);
         // Contextmenu bubbles from icons and windows too; only the bare
         // background (event fired directly on this Box) opens our menu,
         // so a window still gets the browser's native menu.

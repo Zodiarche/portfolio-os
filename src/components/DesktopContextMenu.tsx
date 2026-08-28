@@ -1,19 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import { useLayoutEffect, useRef, useState } from "react";
+import { TASKBAR_HEIGHT } from "../constants/layout";
 import { useMenuKeyboard } from "../hooks/useMenuKeyboard";
 import type { DesktopContextMenuProps } from "../types/desktop";
-import type { Position } from "../types/window";
+import type { Position, Size } from "../types/window";
 
 const VIEWPORT_MARGIN = 8;
 
 // Desktop is overflow:hidden with no scrollbar, so a menu opened near an edge
 // must be pulled back into the viewport rather than clipped and unreachable.
-function clampToViewport(
-  position: Position,
-  menuSize: { width: number; height: number },
-): Position {
+// The taskbar has no z-index of its own, so bottom clamping also has to stay
+// clear of it (matches the convention in useIconGrid's getMaxRows).
+function clampToViewport(position: Position, menuSize: Size): Position {
   const maxX = window.innerWidth - menuSize.width - VIEWPORT_MARGIN;
-  const maxY = window.innerHeight - menuSize.height - VIEWPORT_MARGIN;
+  const maxY = window.innerHeight - TASKBAR_HEIGHT - menuSize.height - VIEWPORT_MARGIN;
   return {
     x: Math.max(VIEWPORT_MARGIN, Math.min(position.x, maxX)),
     y: Math.max(VIEWPORT_MARGIN, Math.min(position.y, maxY)),
@@ -66,8 +66,9 @@ export default function DesktopContextMenu({
         position: "absolute",
         left: renderedPosition.x,
         top: renderedPosition.y,
-        // Hidden until measured, to avoid a one-frame flash at the unclamped position.
-        visibility: clampedPosition ? "visible" : "hidden",
+        // Opacity, not visibility: the APG effect in useMenuKeyboard focuses the
+        // first item on mount, and a visibility:hidden element cannot take focus.
+        opacity: clampedPosition ? 1 : 0,
         zIndex: 1300,
         minWidth: 210,
         p: 0.75,
