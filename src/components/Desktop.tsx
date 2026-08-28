@@ -7,6 +7,8 @@ import { useIconGrid } from "../hooks/useIconGrid";
 import { useRecentItems } from "../hooks/useRecentItems";
 import { useWindowManager } from "../hooks/useWindowManager";
 import type { DesktopActions, FileData, FolderData } from "../types/desktop";
+import type { Position } from "../types/window";
+import DesktopContextMenu from "./DesktopContextMenu";
 import DesktopIcon from "./DesktopIcon";
 import FolderExplorer from "./FolderExplorer";
 import OSWindow from "./OSWindow";
@@ -16,7 +18,8 @@ import Taskbar from "./Taskbar";
 const itemIds = desktopItems.map((item) => item.id);
 
 export default function Desktop() {
-  const { iconPixelPositions, handleIconDragEnd } = useIconGrid(itemIds);
+  const { iconPixelPositions, handleIconDragEnd, resetPositions } = useIconGrid(itemIds);
+  const [contextMenuPosition, setContextMenuPosition] = useState<Position | null>(null);
 
   const renderFolderContent = useCallback(
     (folder: FolderData, openFile: (file: FileData) => void) => (
@@ -69,7 +72,19 @@ export default function Desktop() {
 
   return (
     <Box
-      onClick={() => setIsStartMenuOpen(false)}
+      onClick={() => {
+        setIsStartMenuOpen(false);
+        setContextMenuPosition(null);
+      }}
+      onContextMenu={(event) => {
+        // Contextmenu bubbles from icons and windows too; only the bare
+        // background (event fired directly on this Box) opens our menu,
+        // so a window still gets the browser's native menu.
+        if (event.target !== event.currentTarget) return;
+        event.preventDefault();
+        setIsStartMenuOpen(false);
+        setContextMenuPosition({ x: event.clientX, y: event.clientY });
+      }}
       sx={{
         width: "100vw",
         height: "100vh",
@@ -130,6 +145,13 @@ export default function Desktop() {
         recentIds={recentIds}
         onOpenItem={desktopActions.openItemById}
         onClose={closeStartMenu}
+      />
+
+      <DesktopContextMenu
+        position={contextMenuPosition}
+        onClose={() => setContextMenuPosition(null)}
+        onSortIcons={resetPositions}
+        onOpenStartMenu={() => setIsStartMenuOpen(true)}
       />
 
       <Taskbar

@@ -41,6 +41,7 @@ export interface UseIconGridReturn {
     event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo,
   ) => void;
+  resetPositions: () => void;
 }
 
 export interface UseWindowManagerReturn {

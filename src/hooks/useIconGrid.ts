@@ -130,5 +130,9 @@ export function useIconGrid(itemIds: string[]): UseIconGridReturn {
     [],
   );
 
-  return { iconPixelPositions, handleIconDragEnd };
+  const resetPositions = useCallback(() => {
+    setGridPositions(calculateInitialPositions(itemIds));
+  }, [itemIds]);
+
+  return { iconPixelPositions, handleIconDragEnd, resetPositions };
 }

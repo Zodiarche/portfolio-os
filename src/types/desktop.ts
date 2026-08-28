@@ -57,3 +57,10 @@ export interface StartMenuProps {
   onOpenItem: (itemId: string) => void;
   onClose: () => void;
 }
+
+export interface DesktopContextMenuProps {
+  position: Position | null;
+  onClose: () => void;
+  onSortIcons: () => void;
+  onOpenStartMenu: () => void;
+}
