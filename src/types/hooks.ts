@@ -79,3 +79,15 @@ export interface UseRecentItemsReturn {
   recentIds: string[];
   recordOpen: (itemId: string) => void;
 }
+
+export interface UseDesktopMenusReturn {
+  isStartMenuOpen: boolean;
+  contextMenuPosition: Position | null;
+  startButtonRef: React.RefObject<HTMLButtonElement>;
+  toggleStartMenu: () => void;
+  closeStartMenu: () => void;
+  openStartMenu: () => void;
+  closeContextMenu: () => void;
+  handleBackgroundClick: () => void;
+  handleBackgroundContextMenu: (event: React.MouseEvent) => void;
+}

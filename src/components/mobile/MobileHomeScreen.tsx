@@ -1,4 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
+import {
+  AVAILABILITY_LABEL,
+  IDENTITY_LOCATION,
+  IDENTITY_NAME,
+  IDENTITY_PITCH,
+  IDENTITY_ROLE,
+} from "../../constants/identity";
 import { flattenFiles, WELCOME_ID } from "../../data/icons";
 import type { MobileHomeScreenProps } from "../../types/mobile";
 import { stripExtension } from "../../utils/stripExtension";
@@ -34,19 +41,19 @@ export default function MobileHomeScreen({ onOpenFile }: MobileHomeScreenProps) 
         }}
       >
         <Typography variant="h6" fontWeight={700}>
-          Benjamin Guillemin
+          {IDENTITY_NAME}
         </Typography>
         <Typography variant="body2" sx={{ opacity: 0.85 }}>
-          Développeur Fullstack Web &amp; Mobile
+          {IDENTITY_ROLE}
         </Typography>
         <Typography variant="body2" sx={{ opacity: 0.85 }}>
-          Bordeaux, France
+          {IDENTITY_LOCATION}
         </Typography>
         <Typography variant="body2" sx={{ mt: 1 }}>
-          Je construis des applications web et mobiles, du serveur à l'interface.
+          {IDENTITY_PITCH}
         </Typography>
         <Typography variant="caption" sx={{ display: "block", mt: 1, opacity: 0.85 }}>
-          En poste, ouvert au freelance
+          {AVAILABILITY_LABEL}
         </Typography>
       </Box>
 

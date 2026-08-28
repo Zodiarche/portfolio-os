@@ -42,14 +42,14 @@ export default function StartMenu({ isOpen, recentIds, onOpenItem, onClose }: St
       role="menuitem"
       tabIndex={-1}
       onClick={() => {
-        onOpenItem(item.id);
         onClose();
+        onOpenItem(item.id);
       }}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          onOpenItem(item.id);
           onClose();
+          onOpenItem(item.id);
         }
       }}
       sx={{

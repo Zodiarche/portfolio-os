@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { CELL_HEIGHT, GRID_PADDING } from "../constants/layout";
 import { DesktopActionsProvider } from "../contexts/DesktopActionsContext";
 import { desktopItems, findItemById, WELCOME_ID } from "../data/icons";
+import { useDesktopMenus } from "../hooks/useDesktopMenus";
 import { useIconGrid } from "../hooks/useIconGrid";
 import { useRecentItems } from "../hooks/useRecentItems";
 import { useWindowManager } from "../hooks/useWindowManager";
 import type { DesktopActions, FileData, FolderData } from "../types/desktop";
-import type { Position } from "../types/window";
 import DesktopContextMenu from "./DesktopContextMenu";
 import DesktopIcon from "./DesktopIcon";
 import FolderExplorer from "./FolderExplorer";
@@ -19,7 +19,6 @@ const itemIds = desktopItems.map((item) => item.id);
 
 export default function Desktop() {
   const { iconPixelPositions, handleIconDragEnd, resetPositions } = useIconGrid(itemIds);
-  const [contextMenuPosition, setContextMenuPosition] = useState<Position | null>(null);
 
   const renderFolderContent = useCallback(
     (folder: FolderData, openFile: (file: FileData) => void) => (
@@ -28,15 +27,18 @@ export default function Desktop() {
     [],
   );
 
-  const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
-  const startButtonRef = useRef<HTMLButtonElement>(null);
+  const {
+    isStartMenuOpen,
+    contextMenuPosition,
+    startButtonRef,
+    toggleStartMenu,
+    closeStartMenu,
+    openStartMenu,
+    closeContextMenu,
+    handleBackgroundClick,
+    handleBackgroundContextMenu,
+  } = useDesktopMenus();
   const { recentIds, recordOpen } = useRecentItems();
-
-  // APG: closing a menu returns focus to the button that opened it.
-  const closeStartMenu = useCallback(() => {
-    setIsStartMenuOpen(false);
-    startButtonRef.current?.focus();
-  }, []);
 
   const {
     windows,
@@ -72,20 +74,8 @@ export default function Desktop() {
 
   return (
     <Box
-      onClick={() => {
-        setIsStartMenuOpen(false);
-        setContextMenuPosition(null);
-      }}
-      onContextMenu={(event) => {
-        setContextMenuPosition(null);
-        // Contextmenu bubbles from icons and windows too; only the bare
-        // background (event fired directly on this Box) opens our menu,
-        // so a window still gets the browser's native menu.
-        if (event.target !== event.currentTarget) return;
-        event.preventDefault();
-        setIsStartMenuOpen(false);
-        setContextMenuPosition({ x: event.clientX, y: event.clientY });
-      }}
+      onClick={handleBackgroundClick}
+      onContextMenu={handleBackgroundContextMenu}
       sx={{
         width: "100vw",
         height: "100vh",
@@ -149,10 +139,14 @@ export default function Desktop() {
       />
 
       <DesktopContextMenu
+        // A second right-click keeps `position` non-null, so the APG "focus the
+        // first item" effect would not re-run and the keyboard cursor would stay
+        // where the previous open left it. Remounting on the new position resets it.
+        key={contextMenuPosition ? `${contextMenuPosition.x},${contextMenuPosition.y}` : "closed"}
         position={contextMenuPosition}
-        onClose={() => setContextMenuPosition(null)}
+        onClose={closeContextMenu}
         onSortIcons={resetPositions}
-        onOpenStartMenu={() => setIsStartMenuOpen(true)}
+        onOpenStartMenu={openStartMenu}
       />
 
       <Taskbar
@@ -160,7 +154,7 @@ export default function Desktop() {
         activeWindow={activeWindow}
         isStartMenuOpen={isStartMenuOpen}
         startButtonRef={startButtonRef}
-        onStartMenuToggle={() => setIsStartMenuOpen((previous) => !previous)}
+        onStartMenuToggle={toggleStartMenu}
         onWindowClick={handleTaskbarWindowClick}
         onIconPositionsUpdate={setIconPositions}
       />

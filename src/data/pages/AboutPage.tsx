@@ -1,5 +1,6 @@
 import { Avatar, Box, Divider, Typography, useTheme } from "@mui/material";
 import { useMemo } from "react";
+import { IDENTITY_ROLE } from "../../constants/identity";
 import { getAge } from "../../utils/getAge";
 
 export default function AboutPage() {
@@ -25,7 +26,7 @@ export default function AboutPage() {
             Benjamin Guillemin
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            Développeur Fullstack Web & Mobile
+            {IDENTITY_ROLE}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Bordeaux, France &nbsp;·&nbsp; {age} ans

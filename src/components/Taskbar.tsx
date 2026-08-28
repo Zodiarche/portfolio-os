@@ -1,6 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import type React from "react";
 import { useEffect, useRef } from "react";
+import { AVAILABILITY_LABEL } from "../constants/identity";
 import { TASKBAR_HEIGHT } from "../constants/layout";
 import { useClock } from "../hooks/useClock";
 import type { TaskbarProps } from "../types/desktop";
@@ -174,7 +175,7 @@ export default function Taskbar({
         }}
       >
         <Typography variant="caption" color="white" noWrap>
-          En poste, ouvert au freelance
+          {AVAILABILITY_LABEL}
         </Typography>
       </Box>
 

@@ -26,7 +26,6 @@ export default function FolderExplorer({ folder, onOpenFile }: FolderExplorerPro
             <Box
               role="button"
               tabIndex={0}
-              aria-label={file.title}
               onClick={() => onOpenFile(file)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") {
