@@ -8,10 +8,12 @@ import { useElementWidth } from "../../hooks/useElementWidth";
 
 // Same-origin worker so it loads under a strict CSP (`script-src 'self'`),
 // instead of pdf.js' default CDN/blob worker.
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url,
-).toString();
+// The `v` query is part of the HTTP cache key. It is here to evict the
+// responses cached as `immutable` for a year while nginx still served `.mjs`
+// as application/octet-stream, which browsers refuse to run as a module worker.
+const workerUrl = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url);
+workerUrl.searchParams.set("v", pdfjs.version);
+pdfjs.GlobalWorkerOptions.workerSrc = workerUrl.toString();
 
 // A4 width in CSS pixels at 96dpi — the PDF's native page width.
 const A4_WIDTH = 794;
