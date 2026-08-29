@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "preview:docker": "docker build -t portfolio-os:preview . && docker run --rm -p 4173:8080 portfolio-os:preview",
     "lint": "biome check src vite.config.ts",
     "lint:fix": "biome check --write src vite.config.ts"
   },
